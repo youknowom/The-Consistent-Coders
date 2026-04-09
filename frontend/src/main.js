@@ -22,6 +22,7 @@ gsap.ticker.lagSmoothing(0);
    ═══════════════════════════════════════════════════ */
 const cursorDot  = document.getElementById('cursor-dot');
 const cursorRing = document.getElementById('cursor-ring');
+const cursorFollowImg = document.getElementById('cursor-follow-img');
 
 if (cursorDot && cursorRing) {
   const xDot  = gsap.quickTo(cursorDot,  'x', { duration: 0.15, ease: 'power3' });
@@ -29,9 +30,18 @@ if (cursorDot && cursorRing) {
   const xRing = gsap.quickTo(cursorRing, 'x', { duration: 0.5,  ease: 'power3' });
   const yRing = gsap.quickTo(cursorRing, 'y', { duration: 0.5,  ease: 'power3' });
 
+  // Cursor-follow image — longer lag for trailing effect
+  let xImg, yImg;
+  if (cursorFollowImg) {
+    xImg = gsap.quickTo(cursorFollowImg, 'x', { duration: 0.55, ease: 'power2' });
+    yImg = gsap.quickTo(cursorFollowImg, 'y', { duration: 0.55, ease: 'power2' });
+  }
+
   window.addEventListener('mousemove', (e) => {
     xDot(e.clientX); yDot(e.clientY);
     xRing(e.clientX); yRing(e.clientY);
+    if (xImg) xImg(e.clientX);
+    if (yImg) yImg(e.clientY);
   });
 
   window.addEventListener('mousedown', () => cursorDot.classList.add('clicking'));
@@ -49,6 +59,46 @@ if (cursorDot && cursorRing) {
     });
   });
 }
+
+
+/* ═══════════════════════════════════════════════════
+   2b. HIW ROW — Cursor-following hover image
+   ═══════════════════════════════════════════════════ */
+(function initHiwHoverImages() {
+  if (!cursorFollowImg) return;
+  const imgEl = cursorFollowImg.querySelector('img');
+  if (!imgEl) return;
+
+  // Map each row to its image src using data-hover-img attribute
+  // Fallback: first child img inside .hiw-row-bg
+  const hiwRows = document.querySelectorAll('.hiw-row');
+
+  hiwRows.forEach(row => {
+    // Derive image src from the existing <img> inside .hiw-row-bg
+    const bgImg = row.querySelector('.hiw-row-bg img');
+    const src   = bgImg ? bgImg.getAttribute('src') : '';
+    const alt   = bgImg ? bgImg.getAttribute('alt') : '';
+
+    row.addEventListener('mouseenter', () => {
+      if (!src) return;
+      // Swap image source
+      imgEl.setAttribute('src', src);
+      imgEl.setAttribute('alt', alt);
+      // Activate
+      cursorFollowImg.classList.add('is-active');
+      // Hide default cursor elements on hiw rows for a cleaner effect
+      if (cursorDot)  cursorDot.style.opacity  = '0';
+      if (cursorRing) cursorRing.style.opacity = '0';
+    });
+
+    row.addEventListener('mouseleave', () => {
+      cursorFollowImg.classList.remove('is-active');
+      // Restore cursor
+      if (cursorDot)  cursorDot.style.opacity  = '';
+      if (cursorRing) cursorRing.style.opacity = '';
+    });
+  });
+})();
 
 
 /* ═══════════════════════════════════════════════════

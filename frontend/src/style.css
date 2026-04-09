@@ -94,6 +94,34 @@ ul { list-style: none; }
   opacity: 0.6;
 }
 
+.cursor-follow-image {
+  position: fixed;
+  top: 0; left: 0;
+  pointer-events: none;
+  z-index: 9998;
+  /* GSAP quickTo sets translateX/Y via 'x' and 'y' props.
+     We shift the element left/up by half its size so the image centres on the cursor. */
+  margin-left: -160px;
+  margin-top: -160px;
+  will-change: transform;
+}
+
+.cursor-follow-image img {
+  width: 320px; height: 320px;
+  object-fit: cover;
+  display: block;
+  opacity: 0;
+  transform: scale(0.75) rotate(-3deg);
+  transition: transform 0.6s var(--ease-out-expo), opacity 0.35s ease;
+  border-radius: 4px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+}
+
+.cursor-follow-image.is-active img {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+}
+
 
 /* ═══════════════════════════════════════════════════
    NOISE / GRAIN OVERLAY
