@@ -382,20 +382,27 @@ document.querySelectorAll('.craft-libs-row').forEach(row => {
 
 
 /* ═══════════════════════════════════════════════════
-   10. IMAGE COMPARATOR (scroll-scrubbed)
+   10. IMAGE COMPARATOR (Pinned during scroll)
    ═══════════════════════════════════════════════════ */
 const comp = document.querySelector('.section-comparator');
 if (comp) {
   const afterWrap = comp.querySelector('.comp-after-wrapper');
   const handle    = comp.querySelector('.comp-handle');
-  gsap.fromTo(afterWrap, { width: '0%' }, {
-    width: '100%', ease: 'none',
-    scrollTrigger: { trigger: comp, start: 'top center', end: 'bottom center', scrub: true }
+
+  const compTl = gsap.timeline({
+    scrollTrigger: {
+      trigger: comp,
+      start: 'top top',
+      end: '+=100%',
+      scrub: true,
+      pin: true,
+      anticipatePin: 1
+    }
   });
-  gsap.fromTo(handle, { left: '0%' }, {
-    left: '100%', ease: 'none',
-    scrollTrigger: { trigger: comp, start: 'top center', end: 'bottom center', scrub: true }
-  });
+
+  compTl
+    .fromTo(afterWrap, { width: '0%' }, { width: '100%', ease: 'none' }, 0)
+    .fromTo(handle,    { left: '0%' },  { left: '100%',  ease: 'none' }, 0);
 }
 
 
