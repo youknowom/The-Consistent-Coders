@@ -27,6 +27,11 @@ app.use((req: Request, res: Response, next: NextFunction) => {
   res.status(404).json({ error: 'Route not found' });
 });
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+if (!process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
+}
+
+// Export app for Vercel Serverless Functions
+export default app;

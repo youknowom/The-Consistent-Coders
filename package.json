@@ -1,0 +1,13 @@
+{
+  "name": "the-consistent-coders-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "build:frontend": "npm run build --workspace=frontend",
+    "build": "npm run build:frontend"
+  }
+}
