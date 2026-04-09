@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "installCommand": "rm -rf package-lock.json frontend/package-lock.json backend/package-lock.json node_modules && npm install",
+  "installCommand": "rm -rf package-lock.json frontend/package-lock.json backend/package-lock.json node_modules frontend/node_modules backend/node_modules && npm install --no-package-lock --os=linux --cpu=x64",
   "buildCommand": "npm run build",
   "outputDirectory": "frontend/dist",
   "framework": "vite"
