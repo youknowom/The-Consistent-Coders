@@ -388,6 +388,7 @@ const comp = document.querySelector('.section-comparator');
 if (comp) {
   const afterWrap = comp.querySelector('.comp-after-wrapper');
   const handle    = comp.querySelector('.comp-handle');
+  const compDynamicText = document.getElementById('compDynamicText');
 
   const compTl = gsap.timeline({
     scrollTrigger: {
@@ -401,8 +402,18 @@ if (comp) {
   });
 
   compTl
-    .fromTo(afterWrap, { width: '0%' }, { width: '100%', ease: 'none' }, 0)
-    .fromTo(handle,    { left: '0%' },  { left: '100%',  ease: 'none' }, 0);
+    .fromTo(afterWrap, { width: '0%' }, { width: '100%', ease: 'none', duration: 1 }, 0)
+    .fromTo(handle,    { left: '0%' },  { left: '100%',  ease: 'none', duration: 1 }, 0);
+
+  if (compDynamicText) {
+    // Initial state
+    gsap.set(compDynamicText, { innerText: 'BEFORE TCC' });
+    
+    // Swap exactly at midpoint (0.5) because total duration is 1
+    compTl.set(compDynamicText, { innerText: 'AFTER TCC' }, 0.5);
+    // Ensure it's reset if scrolling back up past 50%
+    compTl.set(compDynamicText, { innerText: 'BEFORE TCC' }, 0.49);
+  }
 }
 
 
