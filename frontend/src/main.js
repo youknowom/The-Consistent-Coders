@@ -20,15 +20,15 @@ gsap.ticker.lagSmoothing(0);
 /* ═══════════════════════════════════════════════════
    2. CUSTOM CURSOR — GSAP quickTo for zero-lag tracking
    ═══════════════════════════════════════════════════ */
-const cursorDot  = document.getElementById('cursor-dot');
+const cursorDot = document.getElementById('cursor-dot');
 const cursorRing = document.getElementById('cursor-ring');
 const cursorFollowImg = document.getElementById('cursor-follow-img');
 
 if (cursorDot && cursorRing) {
-  const xDot  = gsap.quickTo(cursorDot,  'x', { duration: 0.15, ease: 'power3' });
-  const yDot  = gsap.quickTo(cursorDot,  'y', { duration: 0.15, ease: 'power3' });
-  const xRing = gsap.quickTo(cursorRing, 'x', { duration: 0.5,  ease: 'power3' });
-  const yRing = gsap.quickTo(cursorRing, 'y', { duration: 0.5,  ease: 'power3' });
+  const xDot = gsap.quickTo(cursorDot, 'x', { duration: 0.15, ease: 'power3' });
+  const yDot = gsap.quickTo(cursorDot, 'y', { duration: 0.15, ease: 'power3' });
+  const xRing = gsap.quickTo(cursorRing, 'x', { duration: 0.5, ease: 'power3' });
+  const yRing = gsap.quickTo(cursorRing, 'y', { duration: 0.5, ease: 'power3' });
 
   // Cursor-follow image — longer lag for trailing effect
   let xImg, yImg;
@@ -45,7 +45,7 @@ if (cursorDot && cursorRing) {
   });
 
   window.addEventListener('mousedown', () => cursorDot.classList.add('clicking'));
-  window.addEventListener('mouseup',   () => cursorDot.classList.remove('clicking'));
+  window.addEventListener('mouseup', () => cursorDot.classList.remove('clicking'));
 
   const hoverTargets = 'a, button, .btn-primary, .magnetic, .craft-card, .work-item, .footer-email, .menu-link, [data-cursor-text]';
   const cTextEl = document.getElementById('cursor-text');
@@ -88,8 +88,8 @@ if (cursorDot && cursorRing) {
   hiwRows.forEach(row => {
     // Derive image src from the existing <img> inside .hiw-row-bg
     const bgImg = row.querySelector('.hiw-row-bg img');
-    const src   = bgImg ? bgImg.getAttribute('src') : '';
-    const alt   = bgImg ? bgImg.getAttribute('alt') : '';
+    const src = bgImg ? bgImg.getAttribute('src') : '';
+    const alt = bgImg ? bgImg.getAttribute('alt') : '';
 
     row.addEventListener('mouseenter', () => {
       if (!src) return;
@@ -99,14 +99,14 @@ if (cursorDot && cursorRing) {
       // Activate
       cursorFollowImg.classList.add('is-active');
       // Hide default cursor elements on hiw rows for a cleaner effect
-      if (cursorDot)  cursorDot.style.opacity  = '0';
+      if (cursorDot) cursorDot.style.opacity = '0';
       if (cursorRing) cursorRing.style.opacity = '0';
     });
 
     row.addEventListener('mouseleave', () => {
       cursorFollowImg.classList.remove('is-active');
       // Restore cursor
-      if (cursorDot)  cursorDot.style.opacity  = '';
+      if (cursorDot) cursorDot.style.opacity = '';
       if (cursorRing) cursorRing.style.opacity = '';
     });
   });
@@ -120,8 +120,8 @@ document.querySelectorAll('.magnetic').forEach(el => {
   const strength = parseFloat(el.getAttribute('data-strength')) || 20;
   el.addEventListener('mousemove', (e) => {
     const rect = el.getBoundingClientRect();
-    const x = (e.clientX - (rect.left + rect.width  / 2)) / strength;
-    const y = (e.clientY - (rect.top  + rect.height / 2)) / strength;
+    const x = (e.clientX - (rect.left + rect.width / 2)) / strength;
+    const y = (e.clientY - (rect.top + rect.height / 2)) / strength;
     gsap.to(el, { x, y, duration: 0.4, ease: 'power2.out' });
   });
   el.addEventListener('mouseleave', () => {
@@ -133,31 +133,31 @@ document.querySelectorAll('.magnetic').forEach(el => {
 /* ═══════════════════════════════════════════════════
    4. HAMBURGER / FULLSCREEN MENU
    ═══════════════════════════════════════════════════ */
-const hamburger     = document.getElementById('hamburgerBtn');
+const hamburger = document.getElementById('hamburgerBtn');
 const fullscreenMenu = document.getElementById('fullscreenMenu');
-const navbar        = document.getElementById('mainNav');
-let isMenuOpen      = false;
+const navbar = document.getElementById('mainNav');
+let isMenuOpen = false;
 
 // Build menu timeline
 const menuTl = gsap.timeline({ paused: true });
 menuTl
   .to('.menu-bg', { y: '0%', duration: 0.7, ease: 'power4.inOut' })
   .to('.menu-link-text', { y: '0%', duration: 0.7, stagger: 0.08, ease: 'power3.out' }, '-=0.4')
-  .to('.menu-footer',    { y: 0, opacity: 1, duration: 0.4, ease: 'power2.out' }, '-=0.2')
-  .to('.menu-social',    { x: 0, opacity: 1, duration: 0.4, ease: 'power2.out' }, '-=0.3')
-  .to('.menu-counter',   { opacity: 1, duration: 0.3 }, '-=0.2');
+  .to('.menu-footer', { y: 0, opacity: 1, duration: 0.4, ease: 'power2.out' }, '-=0.2')
+  .to('.menu-social', { x: 0, opacity: 1, duration: 0.4, ease: 'power2.out' }, '-=0.3')
+  .to('.menu-counter', { opacity: 1, duration: 0.3 }, '-=0.2');
 
 gsap.set('.menu-link-text', { y: '110%' });
-gsap.set('.menu-footer',    { opacity: 0, y: 24 });
-gsap.set('.menu-social',    { opacity: 0, x: 20 });
-gsap.set('.menu-counter',   { opacity: 0 });
+gsap.set('.menu-footer', { opacity: 0, y: 24 });
+gsap.set('.menu-social', { opacity: 0, x: 20 });
+gsap.set('.menu-counter', { opacity: 0 });
 
 // Update counter as user highlights menu items
 const menuItems = document.querySelectorAll('.menu-link');
 const counterEl = document.getElementById('menuCounter');
 menuItems.forEach((link, i) => {
   link.addEventListener('mouseenter', () => {
-    if (counterEl) counterEl.textContent = `0${i+1} / 0${menuItems.length}`;
+    if (counterEl) counterEl.textContent = `0${i + 1} / 0${menuItems.length}`;
   });
 });
 
@@ -225,10 +225,10 @@ document.querySelectorAll('.menu-link').forEach(link => {
 const heroTl = gsap.timeline({ delay: 0.2 });
 heroTl
   .from('.section-hero', { clipPath: 'circle(0% at 50% 50%)', duration: 1.4, ease: 'power4.inOut' })
-  .from('.hero-eyebrow',  { y: 20, opacity: 0, duration: 0.6, ease: 'power2.out' }, '-=0.4')
-  .from('.split-line',    { y: 200, opacity: 0, duration: 1.2, stagger: 0.15, ease: 'power4.out' }, '-=0.8')
-  .from('.hero-subtext',  { y: 20,  opacity: 0, duration: 0.6, ease: 'power2.out' }, '-=0.4')
-  .from('.hero-cta',      { y: 24,  opacity: 0, duration: 0.6, ease: 'power2.out' }, '-=0.3');
+  .from('.hero-eyebrow', { y: 20, opacity: 0, duration: 0.6, ease: 'power2.out' }, '-=0.4')
+  .from('.split-line', { y: 200, opacity: 0, duration: 1.2, stagger: 0.15, ease: 'power4.out' }, '-=0.8')
+  .from('.hero-subtext', { y: 20, opacity: 0, duration: 0.6, ease: 'power2.out' }, '-=0.4')
+  .from('.hero-cta', { y: 24, opacity: 0, duration: 0.6, ease: 'power2.out' }, '-=0.3');
 
 // Hero bg zoom parallax
 gsap.to('.hero-bg-parallax img', {
@@ -260,13 +260,14 @@ document.querySelectorAll('.reveal-text').forEach(el => {
   split.words.forEach(word => {
     const wrapper = document.createElement('span');
     wrapper.style.overflow = 'hidden';
-    wrapper.style.display  = 'inline-block';
+    wrapper.style.display = 'inline-block';
     word.parentNode.insertBefore(wrapper, word);
     wrapper.appendChild(word);
   });
   gsap.fromTo(split.words,
     { y: '105%' },
-    { y: '0%', duration: 1.2, stagger: 0.08, ease: 'power4.out',
+    {
+      y: '0%', duration: 1.2, stagger: 0.08, ease: 'power4.out',
       scrollTrigger: { trigger: el, start: 'top 85%' }
     }
   );
@@ -296,7 +297,7 @@ gsap.utils.toArray('.draw-path').forEach(path => {
 gsap.utils.toArray('.stat-num').forEach(counter => {
   const target = +counter.getAttribute('data-target');
   const suffix = counter.getAttribute('data-suffix') || '';
-  const proxy  = { val: 0 };
+  const proxy = { val: 0 };
   ScrollTrigger.create({
     trigger: counter,
     start: 'top 85%',
@@ -314,7 +315,7 @@ gsap.utils.toArray('.stat-num').forEach(counter => {
 gsap.utils.toArray('.cc-count-num').forEach(counter => {
   const target = +counter.getAttribute('data-target');
   const suffix = counter.getAttribute('data-suffix') || '';
-  const proxy  = { val: 0 };
+  const proxy = { val: 0 };
   ScrollTrigger.create({
     trigger: counter,
     start: 'top 90%',
@@ -356,7 +357,8 @@ gsap.utils.toArray('.reveal-fade').forEach(el => {
   if (!el.classList.contains('craft-card') && !el.classList.contains('craft-lib-pill')) {
     gsap.fromTo(el,
       { y: 60, opacity: 0 },
-      { y: 0, opacity: 1, duration: 1, ease: 'power3.out',
+      {
+        y: 0, opacity: 1, duration: 1, ease: 'power3.out',
         scrollTrigger: { trigger: el, start: 'top 85%' }
       }
     );
@@ -382,7 +384,7 @@ document.querySelectorAll('.craft-libs-row').forEach(row => {
 const comp = document.querySelector('.section-comparator');
 if (comp) {
   const afterWrap = comp.querySelector('.comp-after-wrapper');
-  const handle    = comp.querySelector('.comp-handle');
+  const handle = comp.querySelector('.comp-handle');
   const compDynamicText = document.getElementById('compDynamicText');
 
   const compTl = gsap.timeline({
@@ -398,12 +400,12 @@ if (comp) {
 
   compTl
     .fromTo(afterWrap, { width: '0%' }, { width: '100%', ease: 'none', duration: 1 }, 0)
-    .fromTo(handle,    { left: '0%' },  { left: '100%',  ease: 'none', duration: 1 }, 0);
+    .fromTo(handle, { left: '0%' }, { left: '100%', ease: 'none', duration: 1 }, 0);
 
   if (compDynamicText) {
     // Initial state
     gsap.set(compDynamicText, { innerText: 'BEFORE TCC' });
-    
+
     // Swap exactly at midpoint (0.5) because total duration is 1
     compTl.set(compDynamicText, { innerText: 'AFTER TCC' }, 0.5);
     // Ensure it's reset if scrolling back up past 50%
@@ -423,14 +425,14 @@ function animateMarquee(trackSelector, direction = 1) {
   function loop() {
     velocity = lenis?.velocity || 0;
     pos += (0.18 + Math.abs(velocity) * 0.005) * direction;
-    if (direction > 0 && pos >= 50)  pos = 0;
+    if (direction > 0 && pos >= 50) pos = 0;
     if (direction < 0 && pos <= -50) pos = 0;
     gsap.set(track, { xPercent: -pos });
     requestAnimationFrame(loop);
   }
   loop();
 }
-animateMarquee('#marqueeTrack1',  1);
+animateMarquee('#marqueeTrack1', 1);
 animateMarquee('#marqueeTrack2', -1);
 
 
@@ -447,12 +449,12 @@ gsap.to('.scroll-progress', {
    13. LIQUID DISTORT (Hero)
    ═══════════════════════════════════════════════════ */
 const liquidEl = document.querySelector('.liquid-hover');
-const disp     = document.querySelector('#liquid-displacement');
+const disp = document.querySelector('#liquid-displacement');
 if (liquidEl && disp) {
   liquidEl.addEventListener('mouseenter', () =>
     gsap.to(disp, { attr: { scale: 60 }, duration: 0.8, ease: 'elastic.out(1, 0.3)' }));
   liquidEl.addEventListener('mouseleave', () =>
-    gsap.to(disp, { attr: { scale: 0 },  duration: 0.5, ease: 'power2.out' }));
+    gsap.to(disp, { attr: { scale: 0 }, duration: 0.5, ease: 'power2.out' }));
 }
 
 
@@ -461,20 +463,20 @@ if (liquidEl && disp) {
    ═══════════════════════════════════════════════════ */
 class TextScramble {
   constructor(el) {
-    this.el    = el;
+    this.el = el;
     this.chars = '!<>-_\\/[]{}—=+*^?#________';
     this.update = this.update.bind(this);
   }
   setText(newText) {
     const oldText = this.el.innerText;
-    const length  = Math.max(oldText.length, newText.length);
+    const length = Math.max(oldText.length, newText.length);
     const promise = new Promise(resolve => (this.resolve = resolve));
     this.queue = [];
     for (let i = 0; i < length; i++) {
-      const from  = oldText[i] || '';
-      const to    = newText[i] || '';
+      const from = oldText[i] || '';
+      const to = newText[i] || '';
       const start = Math.floor(Math.random() * 16);
-      const end   = start + Math.floor(Math.random() * 16);
+      const end = start + Math.floor(Math.random() * 16);
       this.queue.push({ from, to, start, end });
     }
     cancelAnimationFrame(this.frameRequest);
@@ -483,7 +485,7 @@ class TextScramble {
     return promise;
   }
   update() {
-    let output   = '';
+    let output = '';
     let complete = 0;
     for (let i = 0, n = this.queue.length; i < n; i++) {
       let { from, to, start, end, char } = this.queue[i];
@@ -513,7 +515,7 @@ class TextScramble {
 document.querySelectorAll('.glitch-hover').forEach(el => {
   if (el.children.length > 0) return;
   const orig = el.innerText;
-  const s    = new TextScramble(el);
+  const s = new TextScramble(el);
   el.addEventListener('mouseenter', () => s.setText(orig));
 });
 
@@ -529,31 +531,31 @@ VanillaTilt.init(document.querySelectorAll('[data-tilt]'), {
 /* ═══════════════════════════════════════════════════
    16. CRAFT CARD MODAL — full breakdown on click
    ═══════════════════════════════════════════════════ */
-const craftModal  = document.getElementById('craftModal');
+const craftModal = document.getElementById('craftModal');
 const modalOverlay = document.getElementById('craftModalOverlay');
-const modalClose  = document.getElementById('craftModalClose');
-const modalTag    = document.getElementById('modalTag');
-const modalTitle  = document.getElementById('modalTitle');
-const modalDesc   = document.getElementById('modalDesc');
-const modalLibs   = document.getElementById('modalLibs');
+const modalClose = document.getElementById('craftModalClose');
+const modalTag = document.getElementById('modalTag');
+const modalTitle = document.getElementById('modalTitle');
+const modalDesc = document.getElementById('modalDesc');
+const modalLibs = document.getElementById('modalLibs');
 const modalPitfalls = document.getElementById('modalPitfalls');
-const modalExample  = document.getElementById('modalExample');
-const modalVideo     = document.getElementById('modalVideo');
+const modalExample = document.getElementById('modalExample');
+const modalVideo = document.getElementById('modalVideo');
 
 function openCraftModal(card) {
   const data = card.dataset;
   if (!craftModal) return;
 
   // Populate content
-  modalTag.textContent   = `// ${data.tag}`;
+  modalTag.textContent = `// ${data.tag}`;
   modalTitle.textContent = data.title;
-  modalDesc.textContent  = data.desc;
+  modalDesc.textContent = data.desc;
 
   // Libraries
   modalLibs.innerHTML = '';
   (data.libs || '').split(',').forEach(lib => {
     const span = document.createElement('span');
-    span.className   = 'craft-modal-lib';
+    span.className = 'craft-modal-lib';
     span.textContent = lib.trim();
     modalLibs.appendChild(span);
   });
@@ -567,7 +569,7 @@ function openCraftModal(card) {
       li.textContent = p;
       modalPitfalls.appendChild(li);
     });
-  } catch {}
+  } catch { }
 
   // Example
   modalExample.textContent = data.example || '';
@@ -603,7 +605,7 @@ document.querySelectorAll('.craft-card').forEach(card => {
   card.addEventListener('click', () => openCraftModal(card));
 });
 
-if (modalClose)   modalClose.addEventListener('click', closeCraftModal);
+if (modalClose) modalClose.addEventListener('click', closeCraftModal);
 if (modalOverlay) modalOverlay.addEventListener('click', closeCraftModal);
 document.addEventListener('keydown', (e) => e.key === 'Escape' && craftModal?.classList.contains('is-open') && closeCraftModal());
 
@@ -711,16 +713,16 @@ barba.init({
    22. SCROLL-TRIGGERED background color shifts
    ═══════════════════════════════════════════════════ */
 const sections = [
-  { el: '.section-hero',        bg: '#0e0e0e', color: '#fafafa' },
-  { el: '.marquee-band',        bg: '#050505', color: '#fafafa' },
-  { el: '.section-stats',       bg: '#050505', color: '#fafafa' },
-  { el: '.section-craft',       bg: '#0e0e0e', color: '#fafafa' },
-  { el: '.section-deck',         bg: '#0e0e0e', color: '#fafafa' },
-  { el: '.section-work',        bg: '#e8e8e8', color: '#050505' },
-  { el: '.section-comparator',  bg: '#0e0e0e', color: '#fafafa' },
-  { el: '.section-jobs',        bg: '#050505', color: '#fafafa' },
-  { el: '.section-fame',        bg: '#0e0e0e', color: '#fafafa' },
-  { el: '.section-footer',      bg: '#050505', color: '#fafafa' },
+  { el: '.section-hero', bg: '#0e0e0e', color: '#fafafa' },
+  { el: '.marquee-band', bg: '#050505', color: '#fafafa' },
+  { el: '.section-stats', bg: '#050505', color: '#fafafa' },
+  { el: '.section-craft', bg: '#0e0e0e', color: '#fafafa' },
+  { el: '.section-deck', bg: '#0e0e0e', color: '#fafafa' },
+  { el: '.section-work', bg: '#e8e8e8', color: '#050505' },
+  { el: '.section-comparator', bg: '#0e0e0e', color: '#fafafa' },
+  { el: '.section-jobs', bg: '#050505', color: '#fafafa' },
+  { el: '.section-fame', bg: '#0e0e0e', color: '#fafafa' },
+  { el: '.section-footer', bg: '#050505', color: '#fafafa' },
 ];
 
 sections.forEach(({ el, bg, color }) => {
@@ -739,14 +741,59 @@ sections.forEach(({ el, bg, color }) => {
 /* ═══════════════════════════════════════════════════
    LEADERBOARD BARS ANIMATION
    ═══════════════════════════════════════════════════ */
-gsap.utils.toArray('.lb-fill').forEach(bar => {
-  gsap.from(bar, {
-    width: '0%',
-    duration: 1.5,
-    ease: 'power4.out',
-    scrollTrigger: {
-      trigger: bar,
-      start: 'top 90%',
+document.querySelectorAll('.lb-bar').forEach(bar => {
+  const fill = bar.querySelector('.lb-fill');
+  const scoreEl = bar.querySelector('.lb-score');
+
+  if (!fill || !scoreEl) return;
+
+  // Get the target width and score from data attributes
+  const targetWidth = fill.getAttribute('data-width') + '%';
+  const targetScore = parseInt(scoreEl.getAttribute('data-score'));
+
+  // Set initial state to 0
+  gsap.set(fill, { width: '0%' });
+  gsap.set(scoreEl, { textContent: '0 pts' });
+
+  // Create the animation
+  ScrollTrigger.create({
+    trigger: '.leaderboard-strip',
+    start: 'top 75%',
+    end: 'bottom 25%',
+    onEnter: () => {
+      // Animate bar width
+      gsap.to(fill, {
+        width: targetWidth,
+        duration: 1.5,
+        ease: 'power4.out'
+      });
+
+      // Animate score counter
+      gsap.to({ val: 0 }, {
+        val: targetScore,
+        duration: 1.5,
+        ease: 'power4.out',
+        onUpdate: function () {
+          scoreEl.textContent = Math.round(this.targets()[0].val) + ' pts';
+        }
+      });
+    },
+    onLeaveBack: () => {
+      // Reset to 0 when scrolling back up
+      gsap.to(fill, {
+        width: '0%',
+        duration: 1.5,
+        ease: 'power4.out'
+      });
+
+      gsap.to({ val: targetScore }, {
+        val: 0,
+        duration: 1.5,
+        ease: 'power4.out',
+        onUpdate: function () {
+          scoreEl.textContent = Math.round(this.targets()[0].val) + ' pts';
+        }
+      });
     }
   });
 });
