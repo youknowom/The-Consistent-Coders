@@ -17,7 +17,9 @@
     
     <!-- Custom Cursor -->
     <div class="custom-cursor-dot" id="cursor-dot"></div>
-    <div class="cursor-ring" id="cursor-ring"></div>
+    <div class="cursor-ring" id="cursor-ring">
+      <span class="cursor-text" id="cursor-text"></span>
+    </div>
     <div class="cursor-follow-image" id="cursor-follow-img"><img src="" alt=""/></div>
 
     <!-- Barba Transition Curtain -->
@@ -217,7 +219,7 @@
                     data-title="Web Fundamentals"
                     data-desc="The complete foundation of every web developer: HTML structure, CSS styling, and JavaScript logic. You'll build your first three real projects and understand how the internet actually works."
                     data-libs="HTML5,CSS3,JavaScript ES6"
-                    data-pitfalls='["Build 3 projects before moving on","Focus on responsive design from day 1","Learn Git and GitHub before week 2","Don'\''t skip CSS Flexbox and Grid — they are essential"]'
+                    data-pitfalls='["Build 3 projects before moving on","Focus on responsive design from day 1","Learn Git and GitHub before week 2","Don&apos;t skip CSS Flexbox and Grid — they are essential"]'
                     data-example="Estimated duration: 4–6 weeks. Resources: MDN Docs, FreeCodeCamp, TCC curated video playlist. Next Step: JavaScript Deep Dive."
                     data-video="qz0aGYrrlhU">
                     <div class="craft-card-inner">
@@ -242,7 +244,7 @@
                     data-title="JavaScript Deep Dive"
                     data-desc="Move beyond syntax into real JavaScript thinking: closures, async/await, the event loop, DOM manipulation, and building interactive features from scratch."
                     data-libs="JavaScript,Node.js Basics,Browser APIs"
-                    data-pitfalls='["Practice with real mini-projects, not just exercises","Understand callbacks before Promises","Don'\''t skip array methods — map, filter, reduce are everywhere","Read the MDN docs when stuck, not just Stack Overflow"]'
+                    data-pitfalls='["Practice with real mini-projects, not just exercises","Understand callbacks before Promises","Don&apos;t skip array methods — map, filter, reduce are everywhere","Read the MDN docs when stuck, not just Stack Overflow"]'
                     data-example="Estimated duration: 6–8 weeks. Resources: javascript.info, TCC JS Series, Eloquent JavaScript. Next Step: Pick React or Backend."
                     data-video="W6NZfCO5SIk">
                     <div class="craft-card-inner">
@@ -347,7 +349,7 @@
                     data-title="UI/UX & Design Systems"
                     data-desc="For designers and developers alike: Figma, design tokens, component libraries, accessibility (WCAG), and how to translate design intent into production code."
                     data-libs="Figma,Design Tokens,Accessibility,CSS Variables"
-                    data-pitfalls='["Design in Figma before coding","Learn accessibility — it'\''s not optional in production","Study real design systems: Material, Radix, Shadcn","Get a developer to code-review your design handoffs"]'
+                    data-pitfalls='["Design in Figma before coding","Learn accessibility — it&apos;s not optional in production","Study real design systems: Material, Radix, Shadcn","Get a developer to code-review your design handoffs"]'
                     data-example="Estimated duration: 6–8 weeks. Resources: TCC Design Track, Figma official tutorials, Refactoring UI book. Next Step: Design-to-code projects.">
                     <div class="craft-card-inner">
                       <div class="craft-card-preview cc-preview-split">
@@ -466,55 +468,7 @@
             </div>
           </section>
 
-          <!-- ═══════════════ PROJECTS ═══════════════ -->
-          <section id="projects" class="section-horizontal theme-dark">
-             <div class="horizontal-sticky">
-                <h2 class="horizontal-title mix-blend reveal-text">REAL PROJECTS</h2>
-                <div class="horizontal-track">
-                   
-                   <div class="h-card glassmorphism">
-                      <div class="h-card-inner">
-                         <div class="h-card-badge mono-text">// LIVE</div>
-                         <h3>TCC JOB BOARD</h3>
-                         <p>A fully automated job aggregator that pulls and curates tech roles daily. Built by 6 members across frontend, backend, and design tracks.</p>
-                         <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=600&q=80" alt="Job Board Project">
-                         <div class="h-card-meta mono-text">FULL-STACK • 6 MEMBERS</div>
-                      </div>
-                   </div>
-                   
-                   <div class="h-card glassmorphism">
-                      <div class="h-card-inner">
-                         <div class="h-card-badge mono-text">// IN PROGRESS</div>
-                         <h3>LEADERBOARD SYSTEM</h3>
-                         <p>A gamified contribution tracker that ranks members by activity, code commits, session attendance, and peer reviews. Real-time updates via WebSockets.</p>
-                         <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=600&q=80" alt="Leaderboard Project">
-                         <div class="h-card-meta mono-text">REACT + NODE • 4 MEMBERS</div>
-                      </div>
-                   </div>
 
-                   <div class="h-card glassmorphism">
-                      <div class="h-card-inner">
-                         <div class="h-card-badge mono-text">// RECRUITING</div>
-                         <h3>TCC PORTFOLIO BUILDER</h3>
-                         <p>A tool for members to generate stunning portfolio sites from a template system, showcasing their projects and contributions — no design skills needed.</p>
-                         <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?auto=format&fit=crop&w=600&q=80" alt="Portfolio Builder">
-                         <div class="h-card-meta mono-text">NEXT.JS • 3 SPOTS OPEN</div>
-                      </div>
-                   </div>
-
-                   <div class="h-card glassmorphism">
-                      <div class="h-card-inner">
-                         <div class="h-card-badge mono-text">// DEPLOYED</div>
-                         <h3>RESOURCE AGGREGATOR</h3>
-                         <p>A curated directory of the best free learning resources, organized by track and skill level. Community-voted and updated weekly.</p>
-                         <img src="https://images.unsplash.com/photo-1605810230434-7631ac76ec81?auto=format&fit=crop&w=600&q=80" alt="Resource Aggregator">
-                         <div class="h-card-meta mono-text">REACT + AIRTABLE • 5 MEMBERS</div>
-                      </div>
-                   </div>
-
-                </div>
-             </div>
-          </section>
 
           <!-- ═══════════════ HOW IT WORKS ═══════════════ -->
           <section class="section-how-it-works theme-black" id="how-it-works">
@@ -559,13 +513,18 @@
               <!-- Phase 4 -->
               <div class="phase-four reveal-fade">
                 <div class="phase-four-inner">
-                  <div class="phase-four-num mono-text">// 04</div>
-                  <h3 class="phase-four-title">Get <span class="text-italic serif-text">Hired</span></h3>
-                  <p class="phase-four-desc">Apply to our curated job board. Use your TCC project portfolio. Connect with our network of hiring managers and founders who trust TCC talent.</p>
-                  <a href="#jobs" class="btn-primary" id="phase4Btn">
-                    <span class="btn-text">EXPLORE JOBS</span>
-                    <div class="btn-bg"></div>
-                  </a>
+                  <div class="phase-four-content">
+                    <div class="phase-four-num mono-text">// 04</div>
+                    <h3 class="phase-four-title">Get <span class="text-italic serif-text">Hired</span></h3>
+                    <p class="phase-four-desc">Apply to our curated job board. Use your TCC project portfolio. Connect with our network of hiring managers and founders who trust TCC talent.</p>
+                    <a href="#jobs" class="btn-primary" id="phase4Btn">
+                      <span class="btn-text">EXPLORE JOBS</span>
+                      <div class="btn-bg"></div>
+                    </a>
+                  </div>
+                  <div class="phase-four-image">
+                    <img src="./src/assets/images/gethired/get hired.png" alt="Get Hired" class="phase-four-img">
+                  </div>
                 </div>
               </div>
             </div>
@@ -1035,6 +994,8 @@
             </div>
 
           </section>
+
+
 
           <!-- ═══════════════ FOOTER / JOIN ═══════════════ -->
           <section id="contact" class="section-footer theme-black">

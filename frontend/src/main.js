@@ -47,15 +47,27 @@ if (cursorDot && cursorRing) {
   window.addEventListener('mousedown', () => cursorDot.classList.add('clicking'));
   window.addEventListener('mouseup',   () => cursorDot.classList.remove('clicking'));
 
-  const hoverTargets = 'a, button, .btn-primary, .magnetic, .craft-card, .work-item, .footer-email, .menu-link';
+  const hoverTargets = 'a, button, .btn-primary, .magnetic, .craft-card, .work-item, .footer-email, .menu-link, [data-cursor-text]';
+  const cTextEl = document.getElementById('cursor-text');
+
   document.querySelectorAll(hoverTargets).forEach(el => {
     el.addEventListener('mouseenter', () => {
       cursorDot.classList.add('hovered');
       cursorRing.classList.add('hovered');
+
+      // Check for cursor text
+      const text = el.getAttribute('data-cursor-text');
+      if (text && cTextEl) {
+        cTextEl.textContent = text;
+        cursorRing.classList.add('has-text');
+        cursorDot.style.opacity = '0';
+      }
     });
     el.addEventListener('mouseleave', () => {
       cursorDot.classList.remove('hovered');
       cursorRing.classList.remove('hovered');
+      cursorRing.classList.remove('has-text');
+      cursorDot.style.opacity = '';
     });
   });
 }
@@ -317,27 +329,10 @@ gsap.utils.toArray('.cc-count-num').forEach(counter => {
 });
 
 
-/* ═══════════════════════════════════════════════════
-   8. HORIZONTAL SCROLL (Pinned)
-   ═══════════════════════════════════════════════════ */
-const track = document.querySelector('.horizontal-track');
-if (track) {
-  const updateHoriz = () => {
-    const walk = track.scrollWidth - window.innerWidth;
-    gsap.to(track, {
-      x: -walk, ease: 'none',
-      scrollTrigger: {
-        trigger: '.section-horizontal', start: 'top top',
-        end: 'bottom bottom', scrub: 1, id: 'horiz'
-      }
-    });
-  };
-  updateHoriz();
-  window.addEventListener('resize', () => {
-    ScrollTrigger.getById('horiz')?.kill();
-    updateHoriz();
-  });
-}
+
+
+
+
 
 
 /* ═══════════════════════════════════════════════════
@@ -720,7 +715,7 @@ const sections = [
   { el: '.marquee-band',        bg: '#050505', color: '#fafafa' },
   { el: '.section-stats',       bg: '#050505', color: '#fafafa' },
   { el: '.section-craft',       bg: '#0e0e0e', color: '#fafafa' },
-  { el: '.section-horizontal',  bg: '#0e0e0e', color: '#fafafa' },
+  { el: '.section-deck',         bg: '#0e0e0e', color: '#fafafa' },
   { el: '.section-work',        bg: '#e8e8e8', color: '#050505' },
   { el: '.section-comparator',  bg: '#0e0e0e', color: '#fafafa' },
   { el: '.section-jobs',        bg: '#050505', color: '#fafafa' },
@@ -739,6 +734,8 @@ sections.forEach(({ el, bg, color }) => {
   });
 });
 
+
+
 /* ═══════════════════════════════════════════════════
    LEADERBOARD BARS ANIMATION
    ═══════════════════════════════════════════════════ */
@@ -756,17 +753,8 @@ gsap.utils.toArray('.lb-fill').forEach(bar => {
 
 
 
-/* ═══════════════════════════════════════════════════
-   22. HORIZONTAL SCROLL FOR CARD ROWS (Desktop)
-   ═══════════════════════════════════════════════════ */
-document.querySelectorAll('.craft-cards-row').forEach(row => {
-  row.addEventListener('wheel', (e) => {
-    if (e.deltaY !== 0) {
-      e.preventDefault();
-      row.scrollLeft += e.deltaY;
-    }
-  });
-});
+/* Already handled inside initPhysicsDeck above */
+
 
 /* ═══════════════════════════════════════════════════
    REFRESH
