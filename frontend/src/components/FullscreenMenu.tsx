@@ -110,6 +110,33 @@ export const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose,
             </Link>
           </li>
           <li className="menu-item">
+            <Link to="/tasks" className="menu-link" onClick={handleLinkClick}>
+              <span className="menu-link-inner">
+                <span className="menu-link-text" data-text="TASKS">
+                  TASKS
+                </span>
+              </span>
+            </Link>
+          </li>
+          <li className="menu-item">
+            <Link to="/contributors" className="menu-link" onClick={handleLinkClick}>
+              <span className="menu-link-inner">
+                <span className="menu-link-text" data-text="HONOR">
+                  HONOR
+                </span>
+              </span>
+            </Link>
+          </li>
+          <li className="menu-item">
+            <Link to="/join" className="menu-link" onClick={handleLinkClick}>
+              <span className="menu-link-inner">
+                <span className="menu-link-text" data-text="JOIN MISSION">
+                  JOIN MISSION
+                </span>
+              </span>
+            </Link>
+          </li>
+          <li className="menu-item">
             <Link to="/jobs" className="menu-link" onClick={handleLinkClick}>
               <span className="menu-link-inner">
                 <span className="menu-link-text" data-text="JOBS">
@@ -150,7 +177,7 @@ export const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose,
           </a>
         </div>
         <div className="menu-counter mono-text" id="menuCounter">
-          01 / 05
+          01 / 08
         </div>
       </div>
     </div>

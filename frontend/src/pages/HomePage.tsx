@@ -5,6 +5,7 @@ import { Stats } from '../components/Stats';
 import { HowItWorks } from '../components/HowItWorks';
 import { Comparator } from '../components/Comparator';
 import { Fame } from '../components/Fame';
+import { JoinCTA } from '../components/JoinCTA';
 import { Footer } from '../components/Footer';
 
 export const HomePage: React.FC = () => {
@@ -16,6 +17,7 @@ export const HomePage: React.FC = () => {
       <HowItWorks />
       <Comparator />
       <Fame />
+      <JoinCTA />
       <Footer />
     </>
   );

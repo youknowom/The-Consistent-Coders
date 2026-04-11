@@ -67,6 +67,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onMenuToggle, isMenuOpen }) => {
     { href: '/', label: 'Home' },
     { href: '/learn', label: 'Learn' },
     { href: '/build', label: 'Build' },
+    { href: '/tasks', label: 'Tasks' },
+    { href: '/contributors', label: 'Honor' },
     { href: '/jobs', label: 'Jobs' },
     { href: '/contact', label: 'Contact' },
   ];
@@ -87,15 +89,14 @@ export const Navbar: React.FC<NavbarProps> = ({ onMenuToggle, isMenuOpen }) => {
         </div>
 
         <div className="nav-right">
-          <a
-            href="https://chat.whatsapp.com/GGLUiPALqOYCPcCZK752Rv?mode=gi_t"
+          <Link
+            to="/join"
             className="nav-cta"
-            target="_blank"
-            rel="noopener noreferrer"
+            style={{ display: 'inline-block' }}
           >
-            <span className="nav-cta-text">Join WhatsApp</span>
+            <span className="nav-cta-text">Join Mission</span>
             <div className="nav-cta-bg"></div>
-          </a>
+          </Link>
 
           <div
             className={`hamburger ${isMenuOpen ? 'hamburger--active' : ''}`}

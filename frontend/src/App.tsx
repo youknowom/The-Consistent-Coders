@@ -11,6 +11,9 @@ import { SEOMeta } from './seo/SEOMeta';
 import { HomePage } from './pages/HomePage';
 import { LearnPage } from './pages/LearnPage';
 import { BuildPage } from './pages/BuildPage';
+import { JoinPage } from './pages/JoinPage';
+import { TasksPage } from './pages/TasksPage';
+import { ContributorsPage } from './pages/ContributorsPage';
 import { JobsPage } from './pages/JobsPage';
 import { ContactPage } from './pages/ContactPage';
 import { NotFoundPage } from './pages/NotFoundPage';
@@ -251,6 +254,9 @@ function AppContent() {
               <Route path="/" element={<HomePage />} />
               <Route path="/learn" element={<LearnPage />} />
               <Route path="/build" element={<BuildPage />} />
+              <Route path="/join" element={<JoinPage />} />
+              <Route path="/tasks" element={<TasksPage />} />
+              <Route path="/contributors" element={<ContributorsPage />} />
               <Route path="/jobs" element={<JobsPage />} />
               <Route path="/contact" element={<ContactPage />} />
               <Route path="*" element={<NotFoundPage />} />

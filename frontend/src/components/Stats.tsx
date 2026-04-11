@@ -14,7 +14,7 @@ const stats: StatItem[] = [
   { target: 265, suffix: '+', label: 'ACTIVE MEMBERS' },
   { target: 5, suffix: '+', label: 'LIVE PROJECTS' },
   { target: 100, suffix: '%', label: 'FREE TO JOIN' },
-  { target: 100, suffix: '', label: 'SESSIONS COMING SOON' },
+  { target: 100, suffix: '+', label: 'SESSIONS COMING SOON' },
 ];
 
 export const Stats: React.FC = () => {
