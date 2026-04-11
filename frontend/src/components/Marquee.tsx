@@ -14,30 +14,34 @@ export const Marquee: React.FC<MarqueeProps> = ({ direction = 1, trackId, theme 
     const track = trackRef.current;
     if (!track) return;
 
-    let pos = 0;
-    let animationFrameId: number;
+    const ctx = gsap.context(() => {
+      let pos = 0;
+      let animationFrameId: number;
 
-    const loop = () => {
-      // Get Lenis velocity if available
-      const lenisVelocity = (window as any).lenis?.velocity || 0;
-      const velocity = lenisVelocity;
+      const loop = () => {
+        // Get Lenis velocity if available
+        const lenisVelocity = (window as any).lenis?.velocity || 0;
+        const velocity = lenisVelocity;
 
-      // Base speed + velocity-based speed
-      pos += (0.25 + Math.abs(velocity) * 0.005) * direction;
+        // Base speed + velocity-based speed
+        pos += (0.25 + Math.abs(velocity) * 0.005) * direction;
 
-      // Reset position for seamless loop (50% is half the content since we duplicate it)
-      if (direction > 0 && pos >= 50) pos = 0;
-      if (direction < 0 && pos <= -50) pos = 0;
+        // Reset position for seamless loop (50% is half the content since we duplicate it)
+        if (direction > 0 && pos >= 50) pos = 0;
+        if (direction < 0 && pos <= -50) pos = 0;
 
-      gsap.set(track, { xPercent: -pos });
-      animationFrameId = requestAnimationFrame(loop);
-    };
+        gsap.set(track, { xPercent: -pos });
+        animationFrameId = requestAnimationFrame(loop);
+      };
 
-    loop();
+      loop();
 
-    return () => {
-      cancelAnimationFrame(animationFrameId);
-    };
+      return () => {
+        cancelAnimationFrame(animationFrameId);
+      };
+    }, trackRef);
+
+    return () => ctx.revert();
   }, [direction]);
 
   return (

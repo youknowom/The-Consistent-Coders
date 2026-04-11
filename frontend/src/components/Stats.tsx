@@ -23,9 +23,11 @@ export const Stats: React.FC = () => {
   useEffect(() => {
     if (!sectionRef.current) return;
 
+    let ctx: gsap.Context;
+
     // Small delay to ensure DOM is ready
     const timer = setTimeout(() => {
-      const ctx = gsap.context(() => {
+      ctx = gsap.context(() => {
         const section = sectionRef.current;
         if (!section) return;
 
@@ -81,11 +83,12 @@ export const Stats: React.FC = () => {
           );
         });
       }, sectionRef);
-
-      return () => ctx.revert();
     }, 100);
 
-    return () => clearTimeout(timer);
+    return () => {
+      clearTimeout(timer);
+      if (ctx) ctx.revert();
+    };
   }, []);
 
   return (

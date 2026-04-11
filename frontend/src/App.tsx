@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { useLenis } from './hooks/useLenis';
 import { CustomCursor } from './components/CustomCursor';
@@ -29,6 +29,7 @@ function AppContent() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const lenisRef = useLenis();
   const location = useLocation();
+  const appRef = useRef<HTMLElement>(null);
 
   // Initialize mobile optimizations
   useEffect(() => {
@@ -64,45 +65,57 @@ function AppContent() {
 
   // Magnetic elements effect
   useEffect(() => {
-    const magneticElements = document.querySelectorAll('.magnetic');
+    const ctx = gsap.context(() => {
+      const magneticElements = document.querySelectorAll('.magnetic');
 
-    magneticElements.forEach((el) => {
-      const strength = parseFloat(el.getAttribute('data-strength') || '20');
+      magneticElements.forEach((el) => {
+        const strength = parseFloat(el.getAttribute('data-strength') || '20');
 
-      const handleMouseMove = (e: MouseEvent) => {
-        const rect = el.getBoundingClientRect();
-        const x = (e.clientX - (rect.left + rect.width / 2)) / strength;
-        const y = (e.clientY - (rect.top + rect.height / 2)) / strength;
-        gsap.to(el, { x, y, duration: 0.4, ease: 'power2.out' });
-      };
+        const handleMouseMove = (e: MouseEvent) => {
+          const rect = el.getBoundingClientRect();
+          const x = (e.clientX - (rect.left + rect.width / 2)) / strength;
+          const y = (e.clientY - (rect.top + rect.height / 2)) / strength;
+          gsap.to(el, { x, y, duration: 0.4, ease: 'power2.out' });
+        };
 
-      const handleMouseLeave = () => {
-        gsap.to(el, { x: 0, y: 0, duration: 0.7, ease: 'elastic.out(1, 0.3)' });
-      };
+        const handleMouseLeave = () => {
+          gsap.to(el, { x: 0, y: 0, duration: 0.7, ease: 'elastic.out(1, 0.3)' });
+        };
 
-      el.addEventListener('mousemove', handleMouseMove as EventListener);
-      el.addEventListener('mouseleave', handleMouseLeave);
-    });
+        el.addEventListener('mousemove', handleMouseMove as EventListener);
+        el.addEventListener('mouseleave', handleMouseLeave);
+        
+        // Store on element to clean up later
+        (el as any)._magneticHandlers = { mousemove: handleMouseMove, mouseleave: handleMouseLeave };
+      });
+    }, appRef);
 
     return () => {
+      const magneticElements = document.querySelectorAll('.magnetic');
       magneticElements.forEach((el) => {
-        el.removeEventListener('mousemove', (() => {}) as EventListener);
-        el.removeEventListener('mouseleave', () => {});
+        if ((el as any)._magneticHandlers) {
+          el.removeEventListener('mousemove', (el as any)._magneticHandlers.mousemove);
+          el.removeEventListener('mouseleave', (el as any)._magneticHandlers.mouseleave);
+        }
       });
+      ctx.revert();
     };
   }, []);
 
   // Scroll progress bar
   useEffect(() => {
-    gsap.to('.scroll-progress', {
-      width: '100%',
-      ease: 'none',
-      scrollTrigger: {
-        scrub: 0,
-        start: 'top top',
-        end: 'bottom bottom',
-      },
+    const ctx = gsap.context(() => {
+      gsap.to('.scroll-progress', {
+        width: '100%',
+        ease: 'none',
+        scrollTrigger: {
+          scrub: 0,
+          start: 'top top',
+          end: 'bottom bottom',
+        },
+      });
     });
+    return () => ctx.revert();
   }, []);
 
   // Refresh ScrollTrigger after all components mount
@@ -115,45 +128,50 @@ function AppContent() {
 
   // Background color transitions
   useEffect(() => {
-    const sections = [
-      { el: '.section-hero', bg: '#0e0e0e', color: '#fafafa' },
-      { el: '.section-vision', bg: '#050505', color: '#fafafa' },
-      { el: '.section-stats', bg: '#0e0e0e', color: '#fafafa' },
-      { el: '.section-how-it-works', bg: '#050505', color: '#fafafa' },
-      { el: '.section-comparator', bg: '#0e0e0e', color: '#fafafa' },
-      { el: '.section-fame', bg: '#0e0e0e', color: '#fafafa' },
-      { el: '.section-footer', bg: '#050505', color: '#fafafa' },
-    ];
+    const ctx = gsap.context(() => {
+      const sections = [
+        { el: '.section-hero', bg: '#0e0e0e', color: '#fafafa' },
+        { el: '.section-vision', bg: '#050505', color: '#fafafa' },
+        { el: '.section-stats', bg: '#0e0e0e', color: '#fafafa' },
+        { el: '.section-how-it-works', bg: '#050505', color: '#fafafa' },
+        { el: '.section-comparator', bg: '#0e0e0e', color: '#fafafa' },
+        { el: '.section-fame', bg: '#0e0e0e', color: '#fafafa' },
+        { el: '.section-footer', bg: '#050505', color: '#fafafa' },
+      ];
 
-    sections.forEach(({ el, bg, color }) => {
-      const target = document.querySelector(el);
-      if (!target) return;
+      sections.forEach(({ el, bg, color }) => {
+        const target = document.querySelector(el);
+        if (!target) return;
 
-      ScrollTrigger.create({
-        trigger: target,
-        start: 'top 55%',
-        onEnter: () =>
-          gsap.to('body', {
-            backgroundColor: bg,
-            color,
-            duration: 0.8,
-            ease: 'power2.inOut',
-            overwrite: 'auto',
-          }),
-        onEnterBack: () =>
-          gsap.to('body', {
-            backgroundColor: bg,
-            color,
-            duration: 0.8,
-            ease: 'power2.inOut',
-            overwrite: 'auto',
-          }),
+        ScrollTrigger.create({
+          trigger: target,
+          start: 'top 55%',
+          onEnter: () =>
+            gsap.to('body', {
+              backgroundColor: bg,
+              color,
+              duration: 0.8,
+              ease: 'power2.inOut',
+              overwrite: 'auto',
+            }),
+          onEnterBack: () =>
+            gsap.to('body', {
+              backgroundColor: bg,
+              color,
+              duration: 0.8,
+              ease: 'power2.inOut',
+              overwrite: 'auto',
+            }),
+        });
       });
     });
+    return () => ctx.revert();
   }, []);
   useEffect(() => {
     let lastScroll = 0;
     const navbar = document.getElementById('mainNav');
+
+    const ctx = gsap.context(() => {});
 
     const handleScroll = ({ scroll }: { scroll: number }) => {
       if (!navbar || isMenuOpen) return;
@@ -174,6 +192,7 @@ function AppContent() {
       if (lenisRef.current) {
         lenisRef.current.off('scroll', handleScroll);
       }
+      ctx.revert();
     };
   }, [lenisRef, isMenuOpen]);
 
@@ -225,7 +244,7 @@ function AppContent() {
       <FullscreenMenu isOpen={isMenuOpen} onClose={closeMenu} lenisRef={lenisRef} />
 
       {/* Main Content */}
-      <main data-barba="wrapper">
+      <main data-barba="wrapper" ref={appRef}>
         <div data-barba="container" data-barba-namespace="home">
           <div className="scroll-container">
             <Routes>

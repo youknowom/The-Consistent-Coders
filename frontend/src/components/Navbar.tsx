@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -27,10 +27,10 @@ export const Navbar: React.FC<NavbarProps> = ({ onMenuToggle, isMenuOpen }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const ctx = gsap.context(() => {
       // Navbar entrance animation
-      gsap.from('.navbar', {
+      gsap.from(navRef.current, {
         y: -100,
         opacity: 0,
         duration: 1,

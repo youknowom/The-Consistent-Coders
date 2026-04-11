@@ -13,9 +13,11 @@ export const Footer: React.FC<FooterProps> = ({ minimal = false }) => {
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
+    let ctx: gsap.Context;
+
     // Small delay to ensure DOM is ready
     const timer = setTimeout(() => {
-      const ctx = gsap.context(() => {
+      ctx = gsap.context(() => {
         // Reveal text
         document.querySelectorAll('.footer-email.reveal-text').forEach((el) => {
           const split = new SplitType(el as HTMLElement, { types: 'words' } as any);
@@ -51,11 +53,12 @@ export const Footer: React.FC<FooterProps> = ({ minimal = false }) => {
           });
         });
       }, sectionRef);
-
-      return () => ctx.revert();
     }, 100);
 
-    return () => clearTimeout(timer);
+    return () => {
+      clearTimeout(timer);
+      if (ctx) ctx.revert();
+    };
   }, []);
 
   return (

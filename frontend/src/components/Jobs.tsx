@@ -13,9 +13,11 @@ export const Jobs: React.FC = () => {
   const splitInstancesRef = useRef<(SplitType | null)[]>([]);
 
   useEffect(() => {
+    let ctx: gsap.Context;
+
     // Small delay to ensure DOM is ready
     const timer = setTimeout(() => {
-      const ctx = gsap.context(() => {
+      ctx = gsap.context(() => {
         // Reveal text
         const titleElements = document.querySelectorAll('.jobs-title.reveal-text');
         if (titleElements.length > 0) {
@@ -71,17 +73,11 @@ export const Jobs: React.FC = () => {
           );
         }
       }, sectionRef);
-
-      return () => {
-        // Clean up SplitType instances
-        splitInstancesRef.current.forEach(revertSplitType);
-        splitInstancesRef.current = [];
-        ctx.revert();
-      };
     }, 100);
 
     return () => {
       clearTimeout(timer);
+      if (ctx) ctx.revert();
       // Clean up on unmount
       splitInstancesRef.current.forEach(revertSplitType);
       splitInstancesRef.current = [];

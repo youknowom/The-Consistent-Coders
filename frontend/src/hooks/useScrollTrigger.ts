@@ -1,4 +1,5 @@
-import { useEffect, useRef, MutableRefObject } from 'react';
+import { useEffect, useRef } from 'react';
+import type { MutableRefObject } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -16,7 +17,7 @@ export const useScrollTrigger = (
   const ref = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    let timeoutId: NodeJS.Timeout | null = null;
+    let timeoutId: ReturnType<typeof setTimeout> | null = null;
     let ctx: gsap.Context | null = null;
     let customCleanup: (() => void) | null = null;
 

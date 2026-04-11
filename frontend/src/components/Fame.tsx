@@ -11,9 +11,11 @@ export const Fame: React.FC = () => {
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
+    let ctx: gsap.Context;
+
     // Small delay to ensure DOM is ready
     const timer = setTimeout(() => {
-      const ctx = gsap.context(() => {
+      ctx = gsap.context(() => {
         // Reveal text
         const titleElements = document.querySelectorAll('.fame-title.reveal-text');
         if (titleElements.length > 0) {
@@ -138,11 +140,12 @@ export const Fame: React.FC = () => {
           });
         }
       }, sectionRef);
-
-      return () => ctx.revert();
     }, 100);
 
-    return () => clearTimeout(timer);
+    return () => {
+      clearTimeout(timer);
+      if (ctx) ctx.revert();
+    };
   }, []);
 
   const getStatsText = (stats: any) => {

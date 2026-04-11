@@ -1,18 +1,23 @@
 import { Link } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 
 export const NotFoundPage = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
-    gsap.fromTo(
-      '.not-found-content',
-      { opacity: 0, y: 50 },
-      { opacity: 1, y: 0, duration: 1, ease: 'power3.out' }
-    );
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        '.not-found-content',
+        { opacity: 0, y: 50 },
+        { opacity: 1, y: 0, duration: 1, ease: 'power3.out' }
+      );
+    }, containerRef);
+    return () => ctx.revert();
   }, []);
 
   return (
-    <div className="not-found-page" style={{
+    <div ref={containerRef} className="not-found-page" style={{
       minHeight: '100vh',
       display: 'flex',
       alignItems: 'center',

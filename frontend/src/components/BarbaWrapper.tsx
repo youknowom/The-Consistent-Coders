@@ -19,6 +19,8 @@ export const BarbaWrapper: React.FC<BarbaWrapperProps> = ({ children }) => {
       return;
     }
 
+    const ctx = gsap.context(() => {});
+
     // Page transition animation on route change
     const panels = document.querySelectorAll('.curtain-panel');
     
@@ -40,15 +42,18 @@ export const BarbaWrapper: React.FC<BarbaWrapperProps> = ({ children }) => {
         const curtain = document.querySelector('.transition-curtain');
         if (!curtain) return;
 
-        // Animate curtain panels coming down (covering the page)
-        await gsap.timeline()
-          .set(curtain, { display: 'flex' })
-          .to(panels, {
-            scaleY: 1,
-            duration: 0.5,
-            stagger: 0.05,
-            ease: 'power3.inOut',
-          });
+        let tl1: gsap.core.Timeline | undefined;
+        ctx.add(() => {
+          tl1 = gsap.timeline()
+            .set(curtain, { display: 'flex' })
+            .to(panels, {
+              scaleY: 1,
+              duration: 0.5,
+              stagger: 0.05,
+              ease: 'power3.inOut',
+            });
+        });
+        if (tl1) await tl1;
         
         // Scroll to top
         window.scrollTo(0, 0);
@@ -64,14 +69,18 @@ export const BarbaWrapper: React.FC<BarbaWrapperProps> = ({ children }) => {
         }
         
         // Animate curtain panels going up (revealing the new page)
-        await gsap.timeline()
-          .to(panels, {
-            scaleY: 0,
-            duration: 0.5,
-            stagger: 0.05,
-            ease: 'power3.inOut',
-          })
-          .set(curtain, { display: 'none' });
+        let tl2: gsap.core.Timeline | undefined;
+        ctx.add(() => {
+          tl2 = gsap.timeline()
+            .to(panels, {
+              scaleY: 0,
+              duration: 0.5,
+              stagger: 0.05,
+              ease: 'power3.inOut',
+            })
+            .set(curtain, { display: 'none' });
+        });
+        if (tl2) await tl2;
       } catch (error) {
         console.warn('Page transition error:', error);
         // If animation fails, just ensure we scroll to top
@@ -91,6 +100,8 @@ export const BarbaWrapper: React.FC<BarbaWrapperProps> = ({ children }) => {
     };
     
     animatePageTransition();
+
+    return () => ctx.revert();
   }, [location.pathname]);
 
   return <>{children}</>;

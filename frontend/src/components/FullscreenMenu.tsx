@@ -13,25 +13,27 @@ export const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose,
   const timelineRef = useRef<gsap.core.Timeline | null>(null);
 
   useEffect(() => {
-    // Build menu timeline
-    const menuTl = gsap.timeline({ paused: true });
+    let ctx = gsap.context(() => {
+      // Build menu timeline
+      const menuTl = gsap.timeline({ paused: true });
 
-    menuTl
-      .to('.menu-bg', { y: '0%', duration: 0.7, ease: 'power4.inOut' })
-      .to('.menu-link-text', { y: '0%', duration: 0.7, stagger: 0.08, ease: 'power3.out' }, '-=0.4')
-      .to('.menu-footer', { y: 0, opacity: 1, duration: 0.4, ease: 'power2.out' }, '-=0.2')
-      .to('.menu-social', { x: 0, opacity: 1, duration: 0.4, ease: 'power2.out' }, '-=0.3')
-      .to('.menu-counter', { opacity: 1, duration: 0.3 }, '-=0.2');
+      menuTl
+        .to('.menu-bg', { y: '0%', duration: 0.7, ease: 'power4.inOut' })
+        .to('.menu-link-text', { y: '0%', duration: 0.7, stagger: 0.08, ease: 'power3.out' }, '-=0.4')
+        .to('.menu-footer', { y: 0, opacity: 1, duration: 0.4, ease: 'power2.out' }, '-=0.2')
+        .to('.menu-social', { x: 0, opacity: 1, duration: 0.4, ease: 'power2.out' }, '-=0.3')
+        .to('.menu-counter', { opacity: 1, duration: 0.3 }, '-=0.2');
 
-    gsap.set('.menu-link-text', { y: '110%' });
-    gsap.set('.menu-footer', { opacity: 0, y: 24 });
-    gsap.set('.menu-social', { opacity: 0, x: 20 });
-    gsap.set('.menu-counter', { opacity: 0 });
+      gsap.set('.menu-link-text', { y: '110%' });
+      gsap.set('.menu-footer', { opacity: 0, y: 24 });
+      gsap.set('.menu-social', { opacity: 0, x: 20 });
+      gsap.set('.menu-counter', { opacity: 0 });
 
-    timelineRef.current = menuTl;
+      timelineRef.current = menuTl;
+    }, menuRef);
 
     return () => {
-      menuTl.kill();
+      ctx.revert();
     };
   }, []);
 

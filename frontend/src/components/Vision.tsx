@@ -15,36 +15,38 @@ export const Vision: React.FC = () => {
     const container = containerRef.current;
     
     let split: SplitType | null = null;
-    let xTo: ((v: number) => void) | null = null;
-    let yTo: ((v: number) => void) | null = null;
-
-    if (spotlight) {
-       gsap.set(spotlight, { xPercent: -50, yPercent: -50, opacity: 0 });
-       xTo = gsap.quickTo(spotlight, "x", { duration: 0.2, ease: "power3" });
-       yTo = gsap.quickTo(spotlight, "y", { duration: 0.2, ease: "power3" });
-    }
-
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!spotlight || !container || !xTo || !yTo) return;
-      const rect = container.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      
-      xTo(x);
-      yTo(y);
-      gsap.to(spotlight, { opacity: 1, duration: 0.4 });
-    };
-
-    const handleMouseLeave = () => {
-      if (spotlight) gsap.to(spotlight, { opacity: 0, duration: 0.6 });
-    };
-
-    if (container) {
-      container.addEventListener('mousemove', handleMouseMove);
-      container.addEventListener('mouseleave', handleMouseLeave);
-    }
 
     const ctx = gsap.context(() => {
+      let xTo: ((v: number) => void) | null = null;
+      let yTo: ((v: number) => void) | null = null;
+
+      if (spotlight) {
+         gsap.set(spotlight, { xPercent: -50, yPercent: -50, opacity: 0 });
+         xTo = gsap.quickTo(spotlight, "x", { duration: 0.2, ease: "power3" });
+         yTo = gsap.quickTo(spotlight, "y", { duration: 0.2, ease: "power3" });
+      }
+
+      const handleMouseMove = (e: MouseEvent) => {
+        if (!spotlight || !container || !xTo || !yTo) return;
+        const rect = container.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        xTo(x);
+        yTo(y);
+        gsap.to(spotlight, { opacity: 1, duration: 0.4 });
+      };
+
+      const handleMouseLeave = () => {
+        if (spotlight) gsap.to(spotlight, { opacity: 0, duration: 0.6 });
+      };
+
+      if (container) {
+        container.addEventListener('mousemove', handleMouseMove);
+        container.addEventListener('mouseleave', handleMouseLeave);
+      }
+
+
       // Huge text color change & Hover Interaction
       const hugeSpans = document.querySelectorAll('.vision-huge-text span');
       const hugeText = document.querySelector('.vision-huge-text');
@@ -83,6 +85,8 @@ export const Vision: React.FC = () => {
             overwrite: 'auto'
           });
         };
+        (hugeText as any)._onEnter = onEnter;
+        (hugeText as any)._onLeave = onLeave;
         hugeText.addEventListener('mouseenter', onEnter);
         hugeText.addEventListener('mouseleave', onLeave);
       }
@@ -116,6 +120,8 @@ export const Vision: React.FC = () => {
            subtext.classList.remove('is-hovered');
         };
 
+        (subtext as any)._onEnter = onEnter;
+        (subtext as any)._onLeave = onLeave;
         subtext.addEventListener('mouseenter', onEnter);
         subtext.addEventListener('mouseleave', onLeave);
       }
@@ -150,15 +156,25 @@ export const Vision: React.FC = () => {
         }
       });
 
+      return () => {
+        if (container) {
+          container.removeEventListener('mousemove', handleMouseMove);
+          container.removeEventListener('mouseleave', handleMouseLeave);
+        }
+        if (hugeText) {
+          hugeText.removeEventListener('mouseenter', (hugeText as any)._onEnter);
+          hugeText.removeEventListener('mouseleave', (hugeText as any)._onLeave);
+        }
+        if (subtextRef.current) {
+          subtextRef.current.removeEventListener('mouseenter', (subtextRef.current as any)._onEnter);
+          subtextRef.current.removeEventListener('mouseleave', (subtextRef.current as any)._onLeave);
+        }
+      };
     }, containerRef);
 
     return () => {
       ctx.revert();
       if (split) split.revert();
-      if (container) {
-        container.removeEventListener('mousemove', handleMouseMove);
-        container.removeEventListener('mouseleave', handleMouseLeave);
-      }
     };
   }, []);
 

@@ -15,10 +15,16 @@ export default defineConfig({
     sourcemap: false,
     rollupOptions: {
       output: {
-        manualChunks: {
-          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
-          'gsap-vendor': ['gsap'],
-          'animation-vendor': ['lenis', '@barba/core']
+        manualChunks(id: string) {
+          if (id.includes('node_modules/react/') || id.includes('node_modules/react-dom/') || id.includes('node_modules/react-router-dom/')) {
+            return 'react-vendor';
+          }
+          if (id.includes('node_modules/gsap/')) {
+            return 'gsap-vendor';
+          }
+          if (id.includes('node_modules/lenis/') || id.includes('node_modules/@barba/core/')) {
+            return 'animation-vendor';
+          }
         }
       }
     }
