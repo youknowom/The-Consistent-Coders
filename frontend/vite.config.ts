@@ -8,6 +8,21 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
+  base: '/',
+  build: {
+    outDir: 'dist',
+    assetsDir: 'assets',
+    sourcemap: false,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
+          'gsap-vendor': ['gsap'],
+          'animation-vendor': ['lenis', '@barba/core']
+        }
+      }
+    }
+  },
   server: {
     proxy: {
       '/api': {

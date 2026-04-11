@@ -13,6 +13,7 @@ import { LearnPage } from './pages/LearnPage';
 import { BuildPage } from './pages/BuildPage';
 import { JobsPage } from './pages/JobsPage';
 import { ContactPage } from './pages/ContactPage';
+import { NotFoundPage } from './pages/NotFoundPage';
 import { initMobileOptimizations } from './utils/mobileOptimizations';
 import './App.css';
 import './responsive.css';
@@ -233,6 +234,7 @@ function AppContent() {
               <Route path="/build" element={<BuildPage />} />
               <Route path="/jobs" element={<JobsPage />} />
               <Route path="/contact" element={<ContactPage />} />
+              <Route path="*" element={<NotFoundPage />} />
             </Routes>
           </div>
         </div>

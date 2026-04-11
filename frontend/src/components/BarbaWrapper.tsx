@@ -25,17 +25,24 @@ export const BarbaWrapper: React.FC<BarbaWrapperProps> = ({ children }) => {
     if (panels.length === 0) {
       // If curtain panels don't exist, just scroll to top and refresh
       window.scrollTo(0, 0);
-      setTimeout(() => ScrollTrigger.refresh(), 100);
+      setTimeout(() => {
+        try {
+          ScrollTrigger.refresh();
+        } catch (error) {
+          console.warn('ScrollTrigger refresh error:', error);
+        }
+      }, 100);
       return;
     }
     
     const animatePageTransition = async () => {
       try {
-        // Note: Do not use ScrollTrigger.getAll().kill() here.
-        // React's cleanup functions in child components handle their own revert().
+        const curtain = document.querySelector('.transition-curtain');
+        if (!curtain) return;
+
         // Animate curtain panels coming down (covering the page)
         await gsap.timeline()
-          .set('.transition-curtain', { display: 'flex' })
+          .set(curtain, { display: 'flex' })
           .to(panels, {
             scaleY: 1,
             duration: 0.5,
@@ -50,7 +57,11 @@ export const BarbaWrapper: React.FC<BarbaWrapperProps> = ({ children }) => {
         await new Promise(resolve => setTimeout(resolve, 100));
         
         // Refresh ScrollTrigger after content is ready
-        ScrollTrigger.refresh();
+        try {
+          ScrollTrigger.refresh();
+        } catch (error) {
+          console.warn('ScrollTrigger refresh error:', error);
+        }
         
         // Animate curtain panels going up (revealing the new page)
         await gsap.timeline()
@@ -60,13 +71,22 @@ export const BarbaWrapper: React.FC<BarbaWrapperProps> = ({ children }) => {
             stagger: 0.05,
             ease: 'power3.inOut',
           })
-          .set('.transition-curtain', { display: 'none' });
+          .set(curtain, { display: 'none' });
       } catch (error) {
         console.warn('Page transition error:', error);
         // If animation fails, just ensure we scroll to top
         window.scrollTo(0, 0);
-        gsap.set('.transition-curtain', { display: 'none' });
-        setTimeout(() => ScrollTrigger.refresh(), 100);
+        const curtain = document.querySelector('.transition-curtain');
+        if (curtain) {
+          gsap.set(curtain, { display: 'none' });
+        }
+        setTimeout(() => {
+          try {
+            ScrollTrigger.refresh();
+          } catch (err) {
+            console.warn('ScrollTrigger refresh error:', err);
+          }
+        }, 100);
       }
     };
     
