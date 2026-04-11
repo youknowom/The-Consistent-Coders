@@ -143,7 +143,7 @@ function AppContent() {
       ];
 
       sections.forEach(({ el, bg, color }) => {
-        const target = document.querySelector(el);
+        const target = (appRef.current || document.body).querySelector(el);
         if (!target) return;
 
         ScrollTrigger.create({

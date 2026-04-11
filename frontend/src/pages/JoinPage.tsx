@@ -11,6 +11,7 @@ export const JoinPage: React.FC = () => {
   const heroRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (!pageRef.current) return;
     const ctx = gsap.context(() => {
       // Hero Entrance
       gsap.from('.join-hero-title span', {
@@ -67,7 +68,7 @@ export const JoinPage: React.FC = () => {
   return (
     <div ref={pageRef} className="join-page">
       {/* SECTION: HERO */}
-      <section ref={heroRef} className="section-hero join-hero theme-black" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', paddingTop: '200px', paddingBottom: '120px' }}>
+      <section ref={heroRef} className="section-hero join-hero theme-black" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', paddingTop: '220px', paddingBottom: '120px' }}>
         <div className="container" style={{ textAlign: 'center', maxWidth: '1200px', margin: '0 auto', padding: '0 2rem' }}>
           <h1 className="join-hero-title" style={{ fontSize: 'clamp(3.5rem, 10vw, 9rem)', lineHeight: '0.9', fontWeight: 900, marginBottom: '2rem' }}>
             <span style={{ display: 'inline-block' }}>BUILD</span> <br />
