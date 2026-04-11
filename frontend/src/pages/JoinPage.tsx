@@ -68,9 +68,16 @@ export const JoinPage: React.FC = () => {
   return (
     <div ref={pageRef} className="join-page">
       {/* SECTION: HERO */}
-      <section ref={heroRef} className="section-hero join-hero theme-black" style={{ minHeight: '100vh', display: 'flex', alignItems: 'flex-start', justifyContent: 'center', paddingTop: '300px', paddingBottom: '120px' }}>
+      <section ref={heroRef} className="section-hero join-hero theme-black" style={{ 
+        minHeight: '100vh', 
+        display: 'flex', 
+        alignItems: 'flex-start', 
+        justifyContent: 'center', 
+        paddingTop: 'clamp(140px, 22vh, 320px)', 
+        paddingBottom: '80px' 
+      }}>
         <div className="container" style={{ textAlign: 'center', maxWidth: '1200px', margin: '0 auto', padding: '0 2rem' }}>
-          <h1 className="join-hero-title" style={{ fontSize: 'clamp(3.5rem, 10vw, 9rem)', lineHeight: '0.9', fontWeight: 900, marginBottom: '4rem' }}>
+          <h1 className="join-hero-title" style={{ fontSize: 'clamp(3.5rem, 10vw, 9rem)', lineHeight: '0.9', fontWeight: 900, marginBottom: 'clamp(2rem, 5vh, 4rem)' }}>
             <span style={{ display: 'inline-block' }}>BUILD</span> <br />
             <span style={{ display: 'inline-block' }} className="accent-text italic-serif">TOGETHER.</span> <br />
             <span style={{ display: 'inline-block' }}>GET HIRED.</span>
