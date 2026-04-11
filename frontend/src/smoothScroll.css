@@ -1,0 +1,108 @@
+/* Smooth Scroll Base Styles */
+html.lenis,
+html.lenis body {
+  height: auto;
+  overflow: hidden;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* Locomotive Scroll Styles */
+[data-scroll-container] {
+  min-height: 100vh;
+}
+
+[data-scroll-section] {
+  will-change: transform;
+}
+
+[data-scroll] {
+  will-change: transform;
+}
+
+/* Smooth scroll performance optimizations */
+.smooth-scroll-container {
+  will-change: transform;
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Parallax elements */
+[data-scroll-speed] {
+  will-change: transform;
+}
+
+/* Fade in on scroll */
+[data-scroll-class="fade-in"] {
+  opacity: 0;
+  transition: opacity 0.6s ease-out;
+}
+
+[data-scroll-class="fade-in"].is-inview {
+  opacity: 1;
+}
+
+/* Slide up on scroll */
+[data-scroll-class="slide-up"] {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+[data-scroll-class="slide-up"].is-inview {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Scale on scroll */
+[data-scroll-class="scale"] {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+[data-scroll-class="scale"].is-inview {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Disable smooth scroll on reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  html.lenis {
+    scroll-behavior: auto !important;
+  }
+  
+  [data-scroll],
+  [data-scroll-speed],
+  [data-scroll-class] {
+    will-change: auto !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  html.lenis,
+  html.lenis body {
+    overflow: auto;
+  }
+  
+  .lenis.lenis-smooth {
+    scroll-behavior: smooth;
+  }
+}

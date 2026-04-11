@@ -1,0 +1,110 @@
+/* HAMBURGER MENU FIX - FORCE VISIBILITY ON MOBILE */
+
+/* Prevent GSAP from hiding hamburger on page load */
+.hamburger {
+  opacity: 1 !important;
+  transform: scale(1) !important;
+}
+
+/* Force hamburger to show on mobile/tablet */
+@media (max-width: 1023px) {
+  /* Hide desktop navigation */
+  .nav-center {
+    display: none !important;
+  }
+
+  .nav-cta {
+    display: none !important;
+  }
+
+  /* Force hamburger to be visible - override any GSAP animations */
+  .hamburger {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: relative !important;
+    width: 48px !important;
+    height: 48px !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 6px !important;
+    cursor: pointer !important;
+    z-index: 10001 !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+    border-radius: 50% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    pointer-events: auto !important;
+    transition: all 0.3s ease !important;
+    transform: scale(1) !important; /* Override GSAP scale */
+  }
+
+  .hamburger:hover {
+    background: rgba(204, 255, 0, 0.1) !important;
+    transform: scale(1.05) !important;
+  }
+
+  /* Force hamburger lines to be visible */
+  .hamburger-line {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    width: 24px !important;
+    height: 2px !important;
+    background: #ccff00 !important;
+    border-radius: 2px !important;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    box-shadow: 0 0 8px rgba(204, 255, 0, 0.3) !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Active state animations */
+  .hamburger--active .hamburger-line:nth-child(1) {
+    transform: translateY(8px) rotate(45deg) !important;
+  }
+
+  .hamburger--active .hamburger-line:nth-child(2) {
+    opacity: 0 !important;
+    transform: scaleX(0) !important;
+  }
+
+  .hamburger--active .hamburger-line:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg) !important;
+  }
+
+  /* Ensure nav-right is visible and positioned correctly */
+  .nav-right {
+    display: flex !important;
+    align-items: center !important;
+    gap: 1rem !important;
+  }
+}
+
+/* Desktop - hide hamburger */
+@media (min-width: 1024px) {
+  .hamburger {
+    display: none !important;
+  }
+
+  .nav-center {
+    display: flex !important;
+  }
+
+  .nav-cta {
+    display: flex !important;
+  }
+}
+
+/* Extra small mobile */
+@media (max-width: 767px) {
+  .hamburger {
+    width: 44px !important;
+    height: 44px !important;
+  }
+
+  .hamburger-line {
+    width: 22px !important;
+  }
+}

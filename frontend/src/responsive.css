@@ -1,0 +1,1574 @@
+/* ═══════════════════════════════════════════════════════════════
+   RESPONSIVE STYLES - THE CONSISTENT CODERS
+   Mobile First Approach with Breakpoints
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ═══ BREAKPOINTS ═══
+   Mobile: 320px - 767px
+   Tablet: 768px - 1023px
+   Desktop: 1024px - 1439px
+   Large Desktop: 1440px+
+*/
+
+/* ═══════════════════════════════════════════════════════════════
+   BASE MOBILE STYLES (320px+)
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Hide custom cursor on mobile/tablet */
+@media (max-width: 1023px) {
+  .custom-cursor-dot,
+  .cursor-ring,
+  .cursor-follow-image {
+    display: none !important;
+  }
+}
+
+/* ═══ CONTAINER & LAYOUT ═══ */
+@media (max-width: 767px) {
+  :root {
+    --nav-height: 70px;
+  }
+
+  .scroll-container {
+    padding: 0;
+  }
+
+  section {
+    padding: 60px 20px !important;
+  }
+
+  /* Reduce section spacing on mobile */
+  .section-hero,
+  .section-stats,
+  .section-craft,
+  .section-how-it-works,
+  .section-comparator,
+  .section-jobs,
+  .section-fame,
+  .section-footer {
+    padding: 60px 20px !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   NAVBAR RESPONSIVE
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Desktop - hide hamburger, show full menu */
+@media (min-width: 1024px) {
+  .hamburger {
+    display: none !important;
+  }
+
+  .nav-center {
+    display: flex !important;
+  }
+
+  .nav-right .nav-cta {
+    display: flex !important;
+  }
+}
+
+/* Tablet and Mobile - show hamburger, hide full menu */
+@media (max-width: 1023px) {
+  .nav-container {
+    padding: 0 20px;
+    justify-content: flex-end;
+  }
+
+  .nav-center {
+    display: none !important;
+  }
+
+  .nav-right {
+    position: static;
+  }
+
+  .nav-right .nav-cta {
+    display: none !important;
+  }
+
+  .hamburger {
+    display: flex !important;
+    width: 48px;
+    height: 48px;
+    position: relative;
+    cursor: pointer;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.05);
+    z-index: 10001;
+    padding: 0;
+  }
+
+  .hamburger:hover {
+    background: rgba(204, 255, 0, 0.1);
+    transform: scale(1.05);
+  }
+
+  .hamburger-line {
+    display: block !important;
+    width: 24px;
+    height: 2px;
+    background: var(--color-accent);
+    border-radius: 2px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 0 8px rgba(204, 255, 0, 0.3);
+  }
+
+  .hamburger--active .hamburger-line:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+
+  .hamburger--active .hamburger-line:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+
+  .hamburger--active .hamburger-line:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+
+  .nav-brand-logo {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+@media (max-width: 767px) {
+  .navbar {
+    height: 70px;
+  }
+
+  .nav-container {
+    padding: 0 16px;
+  }
+
+  .nav-brand-logo {
+    width: 36px;
+    height: 36px;
+  }
+
+  .hamburger {
+    width: 44px !important;
+    height: 44px !important;
+  }
+
+  .hamburger-line {
+    width: 22px !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   HERO SECTION RESPONSIVE
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Desktop hero padding */
+@media (min-width: 1024px) {
+  .section-hero {
+    padding-top: 100px !important;
+    min-height: 100vh;
+  }
+
+  .hero-content {
+    padding-top: 60px;
+  }
+}
+
+@media (max-width: 1023px) {
+  .hero-content {
+    padding: 0 30px;
+  }
+
+  .hero-title {
+    font-size: 12vw !important;
+    line-height: 1.1 !important;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.7rem;
+    margin-bottom: 20px;
+  }
+
+  .hero-subtext {
+    font-size: 0.85rem;
+    margin-top: 20px;
+  }
+
+  .hero-cta {
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 30px;
+  }
+
+  .hero-badges {
+    flex-direction: column;
+    gap: 15px;
+    bottom: 30px;
+    right: 20px;
+  }
+
+  .hero-badge {
+    padding: 12px 20px;
+  }
+
+  .badge-value {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .hero-content {
+    padding: 0 20px;
+    min-height: calc(100vh - 70px);
+  }
+
+  .hero-title {
+    font-size: 14vw !important;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.65rem;
+  }
+
+  .hero-subtext {
+    font-size: 0.75rem;
+  }
+
+  .btn-primary {
+    padding: 16px 32px;
+    font-size: 0.8rem;
+  }
+
+  .hero-scroll-hint {
+    font-size: 0.65rem;
+  }
+
+  .hero-badges {
+    position: static;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 30px;
+    gap: 10px;
+  }
+
+  .hero-badge {
+    padding: 10px 16px;
+    font-size: 0.7rem;
+  }
+
+  .badge-value {
+    font-size: 1.2rem;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   STATS SECTION RESPONSIVE
+   ═══════════════════════════════════════════════════════════════ */
+
+@media (max-width: 1023px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 20px;
+  }
+
+  .stat-card {
+    padding: 30px 20px;
+  }
+
+  .stat-number {
+    font-size: 2.5rem;
+  }
+
+  .stat-label {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .stats-grid {
+    grid-template-columns: 1fr !important;
+    gap: 15px;
+  }
+
+  .stat-card {
+    padding: 25px 20px;
+  }
+
+  .stat-number {
+    font-size: 2rem;
+  }
+
+  .stat-label {
+    font-size: 0.75rem;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   CRAFT/LEARN SECTION RESPONSIVE
+   ═══════════════════════════════════════════════════════════════ */
+
+@media (max-width: 1023px) {
+  .craft-header,
+  .jobs-header,
+  .fame-header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .craft-title,
+  .jobs-title,
+  .fame-title {
+    font-size: 2.5rem !important;
+    line-height: 1.2 !important;
+  }
+
+  .craft-subtitle,
+  .jobs-subtitle,
+  .fame-subtitle {
+    font-size: 0.95rem;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .craft-label,
+  .jobs-label,
+  .fame-label {
+    font-size: 0.7rem;
+  }
+
+  .craft-cards-row {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
+    gap: 20px;
+  }
+
+  .craft-card {
+    min-height: 280px;
+  }
+
+  .craft-card-title {
+    font-size: 1.3rem;
+  }
+
+  .craft-card-desc {
+    font-size: 0.75rem;
+  }
+
+  .craft-category-label {
+    font-size: 0.7rem;
+    margin-bottom: 20px;
+  }
+
+  .craft-libs-row {
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+  }
+
+  .craft-lib-pill {
+    font-size: 0.7rem;
+    padding: 8px 16px;
+  }
+}
+
+@media (max-width: 767px) {
+  .craft-title,
+  .jobs-title,
+  .fame-title {
+    font-size: 2rem !important;
+  }
+
+  .craft-subtitle,
+  .jobs-subtitle,
+  .fame-subtitle {
+    font-size: 0.85rem;
+  }
+
+  .craft-cards-row {
+    grid-template-columns: 1fr !important;
+    gap: 15px;
+  }
+
+  .craft-card {
+    min-height: 250px;
+  }
+
+  .craft-card-title {
+    font-size: 1.2rem;
+  }
+
+  .craft-card--wide {
+    grid-column: span 1;
+  }
+
+  .craft-lib-pill {
+    font-size: 0.65rem;
+    padding: 6px 12px;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   HOW IT WORKS SECTION RESPONSIVE
+   ═══════════════════════════════════════════════════════════════ */
+
+@media (max-width: 1023px) {
+  .how-phases {
+    grid-template-columns: 1fr !important;
+    gap: 30px;
+  }
+
+  .phase-card {
+    padding: 30px;
+  }
+
+  .phase-number {
+    font-size: 3rem;
+  }
+
+  .phase-title {
+    font-size: 1.5rem;
+  }
+
+  .phase-desc {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .phase-card {
+    padding: 25px 20px;
+  }
+
+  .phase-number {
+    font-size: 2.5rem;
+  }
+
+  .phase-title {
+    font-size: 1.3rem;
+  }
+
+  .phase-desc {
+    font-size: 0.85rem;
+  }
+
+  .phase-list li {
+    font-size: 0.8rem;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SESSIONS SECTION RESPONSIVE
+   ═══════════════════════════════════════════════════════════════ */
+
+@media (max-width: 1023px) {
+  .sessions-grid {
+    grid-template-columns: 1fr !important;
+    gap: 25px;
+  }
+
+  .session-card {
+    padding: 30px;
+  }
+
+  .session-title {
+    font-size: 1.4rem;
+  }
+
+  .session-desc {
+    font-size: 0.9rem;
+  }
+
+  .session-meta {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .session-card {
+    padding: 25px 20px;
+  }
+
+  .session-title {
+    font-size: 1.2rem;
+  }
+
+  .session-desc {
+    font-size: 0.85rem;
+  }
+
+  .session-meta {
+    font-size: 0.7rem;
+  }
+
+  .session-pitfalls li {
+    font-size: 0.8rem;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   COMPARATOR SECTION RESPONSIVE
+   ═══════════════════════════════════════════════════════════════ */
+
+@media (max-width: 1023px) {
+  .comparator-wrapper {
+    max-width: 100%;
+    height: 400px;
+  }
+
+  .comparator-label {
+    font-size: 0.75rem;
+    padding: 8px 16px;
+  }
+}
+
+@media (max-width: 767px) {
+  .comparator-wrapper {
+    height: 300px;
+  }
+
+  .comparator-label {
+    font-size: 0.7rem;
+    padding: 6px 12px;
+  }
+
+  .comparator-slider {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   JOBS SECTION RESPONSIVE
+   ═══════════════════════════════════════════════════════════════ */
+
+@media (max-width: 1023px) {
+  .jobs-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px;
+  }
+
+  .job-card {
+    padding: 25px;
+  }
+
+  .job-role {
+    font-size: 1.3rem;
+  }
+
+  .job-company {
+    font-size: 0.95rem;
+  }
+
+  .job-meta {
+    font-size: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .job-skills {
+    gap: 8px;
+  }
+
+  .skill-tag {
+    font-size: 0.7rem;
+    padding: 6px 12px;
+  }
+}
+
+@media (max-width: 767px) {
+  .job-card {
+    padding: 20px;
+  }
+
+  .job-role {
+    font-size: 1.2rem;
+  }
+
+  .job-company {
+    font-size: 0.9rem;
+  }
+
+  .job-meta {
+    font-size: 0.7rem;
+    gap: 8px;
+  }
+
+  .job-meta span {
+    flex: 0 0 auto;
+  }
+
+  .skill-tag {
+    font-size: 0.65rem;
+    padding: 5px 10px;
+  }
+
+  .job-apply-btn {
+    font-size: 0.75rem;
+    padding: 8px 16px;
+  }
+
+  .job-guidance-text {
+    font-size: 0.85rem;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   FAME/HALL OF FAME SECTION RESPONSIVE
+   ═══════════════════════════════════════════════════════════════ */
+
+@media (max-width: 1023px) {
+  .fame-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 20px;
+  }
+
+  .fame-card {
+    padding: 25px;
+  }
+
+  .fame-avatar {
+    width: 80px;
+    height: 80px;
+  }
+
+  .fame-name {
+    font-size: 1.2rem;
+  }
+
+  .fame-role {
+    font-size: 0.75rem;
+  }
+
+  .fame-stats {
+    font-size: 0.75rem;
+  }
+
+  .fame-badge-tag {
+    font-size: 0.65rem;
+    padding: 4px 10px;
+  }
+
+  .leaderboard-bars {
+    gap: 15px;
+  }
+
+  .lb-name {
+    font-size: 0.85rem;
+    min-width: 100px;
+  }
+
+  .lb-score {
+    font-size: 0.75rem;
+    min-width: 60px;
+  }
+}
+
+@media (max-width: 767px) {
+  .fame-grid {
+    grid-template-columns: 1fr !important;
+    gap: 15px;
+  }
+
+  .fame-card {
+    padding: 20px;
+  }
+
+  .fame-avatar {
+    width: 70px;
+    height: 70px;
+  }
+
+  .fame-name {
+    font-size: 1.1rem;
+  }
+
+  .fame-role {
+    font-size: 0.7rem;
+  }
+
+  .fame-stats {
+    font-size: 0.7rem;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .fame-stats span:nth-child(2) {
+    display: none;
+  }
+
+  .fame-badge-tag {
+    font-size: 0.6rem;
+    padding: 4px 8px;
+  }
+
+  .leaderboard-label {
+    font-size: 0.7rem;
+  }
+
+  .lb-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .lb-name {
+    font-size: 0.8rem;
+    min-width: auto;
+    width: 100%;
+  }
+
+  .lb-track {
+    width: 100%;
+  }
+
+  .lb-score {
+    font-size: 0.7rem;
+    align-self: flex-end;
+  }
+
+  .fame-join-text {
+    font-size: 0.85rem;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   CONTACT PAGE RESPONSIVE
+   ═══════════════════════════════════════════════════════════════ */
+
+@media (max-width: 1023px) {
+  .contact-hero-title {
+    font-size: 3rem !important;
+  }
+
+  .contact-subtitle {
+    font-size: 0.95rem;
+  }
+
+  .contact-main-content {
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .contact-methods {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 20px;
+  }
+
+  .contact-form-wrapper {
+    width: 100%;
+  }
+
+  .contact-card {
+    padding: 25px;
+  }
+
+  .contact-card-title {
+    font-size: 1.2rem;
+  }
+
+  .contact-card-description {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .contact-hero {
+    padding: 60px 20px;
+  }
+
+  .contact-hero-title {
+    font-size: 2.2rem !important;
+  }
+
+  .contact-eyebrow {
+    font-size: 0.65rem;
+  }
+
+  .contact-subtitle {
+    font-size: 0.85rem;
+  }
+
+  .contact-methods {
+    grid-template-columns: 1fr !important;
+    gap: 15px;
+  }
+
+  .contact-card {
+    padding: 20px;
+  }
+
+  .contact-card-icon {
+    font-size: 2rem;
+  }
+
+  .contact-card-title {
+    font-size: 1.1rem;
+  }
+
+  .contact-card-description {
+    font-size: 0.8rem;
+  }
+
+  .contact-card-link {
+    font-size: 0.7rem;
+  }
+
+  .contact-form-title {
+    font-size: 1.5rem;
+  }
+
+  .contact-form-subtitle {
+    font-size: 0.75rem;
+  }
+
+  .form-label {
+    font-size: 0.7rem;
+  }
+
+  .form-input {
+    font-size: 0.9rem;
+    padding: 12px 0;
+  }
+
+  .contact-submit {
+    width: 100%;
+    padding: 16px;
+  }
+
+  .contact-direct-email {
+    padding: 40px 20px;
+  }
+
+  .contact-direct-link {
+    font-size: 1.2rem;
+    word-break: break-all;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   FOOTER RESPONSIVE
+   ═══════════════════════════════════════════════════════════════ */
+
+@media (max-width: 1023px) {
+  .footer-eyebrow {
+    font-size: 0.75rem;
+  }
+
+  .footer-tagline {
+    font-size: 1.5rem;
+  }
+
+  .footer-cta {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .footer-cta .btn-primary {
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .footer-links {
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+  }
+
+  .footer-link {
+    font-size: 0.75rem;
+  }
+
+  .footer-email {
+    font-size: 1.8rem;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 767px) {
+  .footer-top {
+    padding: 40px 20px;
+  }
+
+  .footer-eyebrow {
+    font-size: 0.7rem;
+  }
+
+  .footer-tagline {
+    font-size: 1.2rem;
+  }
+
+  .footer-cta {
+    gap: 12px;
+  }
+
+  .footer-cta .btn-primary {
+    padding: 14px 24px;
+    font-size: 0.8rem;
+  }
+
+  .footer-links {
+    gap: 12px;
+  }
+
+  .footer-link {
+    font-size: 0.7rem;
+  }
+
+  .footer-email {
+    font-size: 1.3rem;
+    word-break: break-all;
+  }
+
+  .footer-bottom {
+    font-size: 0.7rem;
+    padding: 20px;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   FULLSCREEN MENU RESPONSIVE
+   ═══════════════════════════════════════════════════════════════ */
+
+@media (max-width: 767px) {
+  .menu-nav {
+    padding: 0 20px;
+  }
+
+  .menu-link {
+    font-size: 2.5rem;
+  }
+
+  .menu-social {
+    flex-wrap: wrap;
+    gap: 15px;
+    padding: 0 20px;
+  }
+
+  .menu-social-link {
+    font-size: 0.8rem;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   MODAL RESPONSIVE
+   ═══════════════════════════════════════════════════════════════ */
+
+@media (max-width: 1023px) {
+  .craft-modal-content {
+    width: 90%;
+    max-width: 600px;
+    padding: 40px 30px;
+  }
+
+  .modal-title {
+    font-size: 1.8rem;
+  }
+
+  .modal-desc {
+    font-size: 0.9rem;
+  }
+
+  .modal-section-title {
+    font-size: 1rem;
+  }
+
+  .modal-list li {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .craft-modal-content {
+    width: 95%;
+    padding: 30px 20px;
+    max-height: 90vh;
+  }
+
+  .modal-close {
+    width: 36px;
+    height: 36px;
+    font-size: 1.2rem;
+  }
+
+  .modal-tag {
+    font-size: 0.65rem;
+    padding: 6px 12px;
+  }
+
+  .modal-title {
+    font-size: 1.5rem;
+  }
+
+  .modal-desc {
+    font-size: 0.85rem;
+  }
+
+  .modal-section-title {
+    font-size: 0.9rem;
+  }
+
+  .modal-list li {
+    font-size: 0.8rem;
+  }
+
+  .modal-example {
+    font-size: 0.8rem;
+    padding: 15px;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   BUTTONS RESPONSIVE
+   ═══════════════════════════════════════════════════════════════ */
+
+@media (max-width: 767px) {
+  .btn-primary,
+  .btn-secondary {
+    padding: 14px 28px;
+    font-size: 0.8rem;
+  }
+
+  .btn-large {
+    padding: 16px 32px;
+    font-size: 0.85rem;
+  }
+
+  /* Disable magnetic effect on mobile */
+  .magnetic {
+    pointer-events: auto !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   TYPOGRAPHY RESPONSIVE
+   ═══════════════════════════════════════════════════════════════ */
+
+@media (max-width: 1023px) {
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+  }
+
+  .mono-text {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 767px) {
+  h1 {
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 1.8rem;
+  }
+
+  h3 {
+    font-size: 1.3rem;
+  }
+
+  p {
+    font-size: 0.9rem;
+  }
+
+  .mono-text {
+    font-size: 0.7rem;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   TABLET SPECIFIC (768px - 1023px)
+   ═══════════════════════════════════════════════════════════════ */
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .craft-cards-row {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  .jobs-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  .fame-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  .contact-methods {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  .sessions-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   LARGE DESKTOP (1440px+)
+   ═══════════════════════════════════════════════════════════════ */
+
+@media (min-width: 1440px) {
+  .scroll-container {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  section {
+    padding: 120px 60px;
+  }
+
+  .hero-title {
+    font-size: 8rem;
+  }
+
+  .craft-title,
+  .jobs-title,
+  .fame-title {
+    font-size: 4rem;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   LANDSCAPE MOBILE (max-height: 500px)
+   ═══════════════════════════════════════════════════════════════ */
+
+@media (max-height: 500px) and (orientation: landscape) {
+  .hero-content {
+    min-height: auto;
+    padding: 40px 20px;
+  }
+
+  .hero-title {
+    font-size: 10vw !important;
+  }
+
+  .hero-badges {
+    position: static;
+    margin-top: 20px;
+  }
+
+  section {
+    padding: 40px 20px !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   TOUCH DEVICE OPTIMIZATIONS
+   ═══════════════════════════════════════════════════════════════ */
+
+@media (hover: none) and (pointer: coarse) {
+  /* Remove hover effects on touch devices */
+  .craft-card:hover,
+  .job-card:hover,
+  .fame-card:hover,
+  .session-card:hover {
+    transform: none !important;
+  }
+
+  /* Make touch targets larger */
+  button,
+  a,
+  .btn-primary,
+  .btn-secondary {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Remove magnetic effects */
+  .magnetic {
+    transform: none !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   ACCESSIBILITY - REDUCED MOTION
+   ═══════════════════════════════════════════════════════════════ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   PRINT STYLES
+   ═══════════════════════════════════════════════════════════════ */
+
+@media print {
+  .navbar,
+  .hamburger,
+  .custom-cursor-dot,
+  .cursor-ring,
+  .noise-overlay,
+  .scroll-progress,
+  .transition-curtain {
+    display: none !important;
+  }
+
+  body {
+    background: white;
+    color: black;
+  }
+
+  section {
+    page-break-inside: avoid;
+  }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   MOBILE TOUCH OPTIMIZATIONS
+   ═══════════════════════════════════════════════════════════════ */
+
+/* CRITICAL: Force hamburger visibility on mobile */
+@media (max-width: 1023px) {
+  .hamburger,
+  div.hamburger,
+  .nav-right .hamburger {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+
+  .hamburger-line,
+  .hamburger span {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+}
+
+/* Use CSS custom property for viewport height (fixes mobile browser address bar) */
+.hero-content,
+.section-hero {
+  min-height: calc(var(--vh, 1vh) * 100);
+}
+
+/* Improve tap highlighting */
+* {
+  -webkit-tap-highlight-color: rgba(204, 255, 0, 0.2);
+}
+
+/* Prevent text selection on buttons and interactive elements */
+button,
+.btn-primary,
+.btn-secondary,
+.hamburger,
+.nav-link {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+
+/* Smooth scrolling for touch devices */
+.is-touch {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Prevent horizontal scroll */
+body,
+html {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+/* Fix for iOS safe areas */
+@supports (padding: env(safe-area-inset-top)) {
+  .navbar {
+    padding-top: calc(20px + env(safe-area-inset-top));
+  }
+
+  .footer-bottom {
+    padding-bottom: calc(20px + env(safe-area-inset-bottom));
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   MOBILE SPECIFIC FIXES
+   ═══════════════════════════════════════════════════════════════ */
+
+@media (max-width: 767px) {
+  /* Prevent zoom on input focus */
+  input,
+  textarea,
+  select {
+    font-size: 16px !important;
+  }
+
+  /* Better spacing for mobile */
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Optimize images for mobile */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Fix for mobile menu */
+  .fullscreen-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Better button sizing for touch */
+  .btn-primary,
+  .btn-secondary,
+  button,
+  a[class*="btn"] {
+    min-height: 48px;
+    padding: 14px 28px;
+  }
+
+  /* Improve card touch targets */
+  .craft-card,
+  .job-card,
+  .fame-card,
+  .session-card,
+  .contact-card {
+    cursor: pointer;
+    -webkit-tap-highlight-color: rgba(204, 255, 0, 0.1);
+  }
+
+  /* Fix for modal on mobile */
+  .craft-modal {
+    padding: 20px;
+  }
+
+  .craft-modal-content {
+    max-height: calc(var(--vh, 1vh) * 90);
+    overflow-y: auto;
+  }
+
+  /* Better form inputs on mobile */
+  .form-input,
+  .form-textarea {
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: 0;
+  }
+
+  /* Fix for sticky navbar on mobile */
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+  }
+
+  /* Add padding to first section to account for fixed navbar */
+  .section-hero {
+    padding-top: calc(70px + 60px) !important;
+    min-height: 100vh;
+  }
+
+  /* Fix hero content positioning */
+  .hero-content {
+    padding-top: 40px;
+  }
+
+  /* Optimize animations for mobile */
+  .is-mobile * {
+    animation-duration: 0.3s !important;
+  }
+
+  /* Better text readability on mobile */
+  body {
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Fix for overflow issues */
+  .craft-card-inner,
+  .job-card-inner,
+  .session-card-inner {
+    overflow: hidden;
+  }
+
+  /* Better spacing for lists on mobile */
+  ul,
+  ol {
+    padding-left: 20px;
+  }
+
+  /* Fix for video embeds */
+  iframe,
+  video {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   TABLET OPTIMIZATIONS
+   ═══════════════════════════════════════════════════════════════ */
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  /* Optimize for tablet landscape */
+  .hero-title {
+    font-size: 10vw !important;
+  }
+
+  /* Better grid layouts for tablet */
+  .craft-cards-row,
+  .jobs-grid,
+  .fame-grid {
+    gap: 25px;
+  }
+
+  /* Optimize touch targets for tablet */
+  .btn-primary,
+  .btn-secondary {
+    min-height: 48px;
+  }
+
+  /* Better modal sizing for tablet */
+  .craft-modal-content {
+    width: 80%;
+    max-width: 700px;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   PERFORMANCE OPTIMIZATIONS
+   ═══════════════════════════════════════════════════════════════ */
+
+/* GPU acceleration for animations */
+.craft-card,
+.job-card,
+.fame-card,
+.session-card,
+.btn-primary,
+.btn-secondary {
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* Optimize scroll performance */
+@media (max-width: 1023px) {
+  * {
+    will-change: auto !important;
+  }
+
+  /* Only animate what's necessary on mobile */
+  .reveal-up,
+  .reveal-fade,
+  .reveal-text {
+    will-change: opacity, transform;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   DARK MODE SUPPORT (if needed in future)
+   ═══════════════════════════════════════════════════════════════ */
+
+@media (prefers-color-scheme: dark) {
+  /* Already dark by default, but can add overrides here */
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   HIGH DPI DISPLAYS
+   ═══════════════════════════════════════════════════════════════ */
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  /* Optimize for retina displays */
+  .nav-brand-logo,
+  .fame-avatar img,
+  img {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   FOLDABLE DEVICES
+   ═══════════════════════════════════════════════════════════════ */
+
+@media (horizontal-viewport-segments: 2) {
+  /* Optimize for foldable devices like Surface Duo */
+  .hero-content,
+  .craft-header,
+  .jobs-header {
+    max-width: 90%;
+    margin: 0 auto;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SMALL MOBILE DEVICES (320px - 374px)
+   ═══════════════════════════════════════════════════════════════ */
+
+@media (max-width: 374px) {
+  .hero-title {
+    font-size: 16vw !important;
+  }
+
+  .craft-title,
+  .jobs-title,
+  .fame-title {
+    font-size: 1.8rem !important;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    padding: 12px 24px;
+    font-size: 0.75rem;
+  }
+
+  .contact-direct-link {
+    font-size: 1rem;
+  }
+
+  .footer-email {
+    font-size: 1.1rem;
+  }
+
+  section {
+    padding: 50px 16px !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   VERY LARGE SCREENS (1920px+)
+   ═══════════════════════════════════════════════════════════════ */
+
+@media (min-width: 1920px) {
+  .scroll-container {
+    max-width: 1600px;
+  }
+
+  .hero-title {
+    font-size: 9rem;
+  }
+
+  section {
+    padding: 140px 80px;
+  }
+}

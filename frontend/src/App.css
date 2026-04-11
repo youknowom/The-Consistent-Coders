@@ -1,3 +1,35 @@
+/* Locomotive Scroll Styles */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* Smooth scroll container */
+[data-scroll-container] {
+  min-height: 100vh;
+}
+
+/* Locomotive Scroll elements */
+[data-scroll] {
+  will-change: transform;
+}
+
 .counter {
   font-size: 16px;
   padding: 5px 10px;
@@ -181,4 +213,105 @@
     right: 0;
     border-right-color: var(--border);
   }
+}
+
+/* Barba.js Transition Curtain */
+.transition-curtain {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  flex-direction: row;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+.curtain-panel {
+  flex: 1;
+  height: 100%;
+  background: #84cc16;
+  transform-origin: top;
+  transform: scaleY(0);
+  will-change: transform;
+  position: relative;
+  overflow: hidden;
+}
+
+.curtain-panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  opacity: 0.5;
+}
+
+/* Transition Loading Indicator */
+.transition-loading {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10000;
+  display: none;
+  pointer-events: none;
+}
+
+.transition-loading.active {
+  display: block;
+}
+
+.transition-loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Alternative transition styles */
+@keyframes curtainReveal {
+  0% {
+    transform: scaleY(0);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+  100% {
+    transform: scaleY(0);
+  }
+}
+
+/* Page transition container */
+[data-barba="container"] {
+  position: relative;
+}
+
+/* Smooth fade for content */
+.barba-leave-active,
+.barba-enter-active {
+  transition: opacity 0.3s ease;
+}
+
+.barba-leave-to {
+  opacity: 0;
+}
+
+.barba-enter-from {
+  opacity: 0;
 }
