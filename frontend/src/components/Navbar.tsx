@@ -30,13 +30,17 @@ export const Navbar: React.FC<NavbarProps> = ({ onMenuToggle, isMenuOpen }) => {
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
       // Navbar entrance animation
-      gsap.from(navRef.current, {
-        y: -100,
-        opacity: 0,
-        duration: 1,
-        ease: 'power3.out',
-        delay: 0.2,
-      });
+      const navContainer = navRef.current?.querySelector('.nav-container');
+      if (navContainer) {
+        gsap.from(navContainer, {
+          y: -100,
+          opacity: 0,
+          duration: 1,
+          ease: 'power3.out',
+          delay: 0.2,
+          clearProps: 'all',
+        });
+      }
 
       // Menu items stagger (only animate if they exist - desktop only)
       const navLinks = document.querySelectorAll('.nav-link');
