@@ -7,6 +7,7 @@ import SplitType from 'split-type';
 import structuredLearningImg from '../assets/images/howitworks/structuredlearning.png';
 import teamProjectsImg from '../assets/images/howitworks/teamprojects.png';
 import earnRecognitionImg from '../assets/images/howitworks/earnrecognition.png';
+import getHiredImg from '../assets/images/gethired/get hired.png';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -168,7 +169,7 @@ export const HowItWorks: React.FC = () => {
               </Link>
             </div>
             <div className="phase-four-image">
-              <img src="./src/assets/images/gethired/get hired.png" alt="Get Hired" className="phase-four-img" />
+              <img src={getHiredImg} alt="Get Hired" className="phase-four-img" />
             </div>
           </div>
         </div>

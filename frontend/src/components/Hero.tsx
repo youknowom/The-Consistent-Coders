@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import heroBg from '../assets/faceboook1.png';
 // import SplitType from 'split-type';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -86,7 +87,7 @@ export const Hero: React.FC = () => {
   return (
     <section id="home" className="section-hero theme-dark" ref={heroRef}>
       <div className="hero-bg-parallax">
-        <img src="./src/assets/faceboook1.png" alt="Coding community background" className="zoom-img" />
+        <img src={heroBg} alt="Coding community background" className="zoom-img" />
         <div className="hero-vignette"></div>
       </div>
 

@@ -1,12 +1,18 @@
 import type { FameCard, LeaderboardEntry } from '../types/index.js';
 
+import yashImg from '../assets/images/yash.webp';
+import atharvaImg from '../assets/images/atharvarahate.webp';
+import prathameshImg from '../assets/images/prathameshpathade.webp';
+import sarthakImg from '../assets/images/sarthakkanade.webp';
+import onkarImg from '../assets/images/onkarshinde.webp';
+
 export const fameData: FameCard[] = [
   {
     id: 'fame-1',
     rank: 1,
     name: 'Yash Mahajan',
     role: '// REACT MENTOR',
-    avatar: './src/assets/images/yash.webp',
+    avatar: yashImg,
     crown: '🥇',
     stats: {
       sessions: 12,
@@ -19,7 +25,7 @@ export const fameData: FameCard[] = [
     rank: 2,
     name: 'Atharva Rahate',
     role: '// UI/UX LEAD',
-    avatar: './src/assets/images/atharvarahate.webp',
+    avatar: atharvaImg,
     crown: '🥈',
     stats: {
       reviews: 8,
@@ -32,7 +38,7 @@ export const fameData: FameCard[] = [
     rank: 3,
     name: 'Prathamesh Ranade',
     role: '// BACKEND ARCHITECT',
-    avatar: './src/assets/images/prathameshpathade.webp',
+    avatar: prathameshImg,
     crown: '🥉',
     stats: {
       sessions: 5,
@@ -45,7 +51,7 @@ export const fameData: FameCard[] = [
     rank: 4,
     name: 'Sarthak Kanade',
     role: '// CONTENT CREATOR',
-    avatar: './src/assets/images/sarthakkanade.webp',
+    avatar: sarthakImg,
     stats: {
       resources: 20,
       projects: 1,
@@ -57,7 +63,7 @@ export const fameData: FameCard[] = [
     rank: 5,
     name: 'Onkar Shinde',
     role: '// FULL-STACK',
-    avatar: './src/assets/images/onkarshinde.webp',
+    avatar: onkarImg,
     stats: {
       prs: 50,
       projects: 2,

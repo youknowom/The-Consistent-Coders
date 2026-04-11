@@ -1,6 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import beforeTccImg from '../assets/images/before/after tcc/beforetcc.png';
+import afterTccImg from '../assets/images/before/after tcc/after tcc.png';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -70,14 +72,14 @@ export const Comparator: React.FC = () => {
     <section className="section-comparator theme-dark" ref={sectionRef}>
       <div className="comparator-inner reveal-fade">
         <img
-          src="./src/assets/images/before/after%20tcc/beforetcc.png"
+          src={beforeTccImg}
           className="comp-img comp-before"
           crossOrigin="anonymous"
           alt="Before TCC"
         />
         <div className="comp-after-wrapper" ref={afterWrapperRef}>
           <img
-            src="./src/assets/images/before/after%20tcc/after%20tcc.png"
+            src={afterTccImg}
             className="comp-img comp-after"
             crossOrigin="anonymous"
             alt="After TCC"
