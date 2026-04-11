@@ -21,18 +21,18 @@ export const CustomCursor: React.FC = () => {
 
     if (!cursorDot || !cursorRing) return;
 
-    // GSAP quickTo for zero-lag tracking
-    const xDot = gsap.quickTo(cursorDot, 'x', { duration: 0.15, ease: 'power3' });
-    const yDot = gsap.quickTo(cursorDot, 'y', { duration: 0.15, ease: 'power3' });
-    const xRing = gsap.quickTo(cursorRing, 'x', { duration: 0.5, ease: 'power3' });
-    const yRing = gsap.quickTo(cursorRing, 'y', { duration: 0.5, ease: 'power3' });
+    // GSAP quickTo for near-zero-lag tracking
+    const xDot = gsap.quickTo(cursorDot, 'x', { duration: 0.05, ease: 'power3' });
+    const yDot = gsap.quickTo(cursorDot, 'y', { duration: 0.05, ease: 'power3' });
+    const xRing = gsap.quickTo(cursorRing, 'x', { duration: 0.25, ease: 'power3' });
+    const yRing = gsap.quickTo(cursorRing, 'y', { duration: 0.25, ease: 'power3' });
 
     let xImg: ((value: number) => void) | undefined;
     let yImg: ((value: number) => void) | undefined;
 
     if (cursorFollowImg) {
-      xImg = gsap.quickTo(cursorFollowImg, 'x', { duration: 0.55, ease: 'power2' });
-      yImg = gsap.quickTo(cursorFollowImg, 'y', { duration: 0.55, ease: 'power2' });
+      xImg = gsap.quickTo(cursorFollowImg, 'x', { duration: 0.1, ease: 'power2' });
+      yImg = gsap.quickTo(cursorFollowImg, 'y', { duration: 0.1, ease: 'power2' });
     }
 
     const handleMouseMove = (e: MouseEvent) => {

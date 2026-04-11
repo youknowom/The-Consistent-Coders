@@ -11,46 +11,59 @@ export const Comparator: React.FC = () => {
   const textRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      const compTl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top top',
-          end: '+=100%',
-          scrub: true,
-          pin: true,
-          anticipatePin: 1,
-        },
-      });
+    // Delay to ensure Lenis is initialized
+    const initTimer = setTimeout(() => {
+      const ctx = gsap.context(() => {
+        const compTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top top',
+            end: '+=100%',
+            scrub: 1,
+            pin: true,
+            anticipatePin: 1,
+            invalidateOnRefresh: true,
+          },
+        });
 
-      compTl
-        .fromTo(afterWrapperRef.current, { width: '0%' }, { width: '100%', ease: 'none', duration: 1 }, 0)
-        .fromTo(handleRef.current, { left: '0%' }, { left: '100%', ease: 'none', duration: 1 }, 0);
+        compTl
+          .fromTo(afterWrapperRef.current, { width: '0%' }, { width: '100%', ease: 'none', duration: 1 }, 0)
+          .fromTo(handleRef.current, { left: '0%' }, { left: '100%', ease: 'none', duration: 1 }, 0);
 
-      // Text swap at midpoint
-      if (textRef.current) {
-        gsap.set(textRef.current, { innerText: 'BEFORE TCC' });
-        compTl.set(textRef.current, { innerText: 'AFTER TCC' }, 0.5);
-        compTl.set(textRef.current, { innerText: 'BEFORE TCC' }, 0.49);
-      }
+        // Text swap at midpoint
+        if (textRef.current) {
+          gsap.set(textRef.current, { innerText: 'BEFORE TCC' });
+          compTl.set(textRef.current, { innerText: 'AFTER TCC' }, 0.5);
+          compTl.set(textRef.current, { innerText: 'BEFORE TCC' }, 0.49);
+        }
 
-      // Reveal fade
-      gsap.utils.toArray<HTMLElement>('.comparator-inner.reveal-fade').forEach((el) => {
-        gsap.fromTo(
-          el,
-          { y: 60, opacity: 0 },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 1,
-            ease: 'power3.out',
-            scrollTrigger: { trigger: el, start: 'top 85%' },
-          }
-        );
-      });
-    }, sectionRef);
+        // Reveal fade
+        gsap.utils.toArray<HTMLElement>('.comparator-inner.reveal-fade').forEach((el) => {
+          gsap.fromTo(
+            el,
+            { y: 60, opacity: 0 },
+            {
+              y: 0,
+              opacity: 1,
+              duration: 1,
+              ease: 'power3.out',
+              scrollTrigger: { 
+                trigger: el, 
+                start: 'top 85%',
+                invalidateOnRefresh: true,
+              },
+            }
+          );
+        });
 
-    return () => ctx.revert();
+        // Force refresh after setup
+        ScrollTrigger.refresh();
+      }, sectionRef);
+
+      return () => ctx.revert();
+    }, 200);
+
+    return () => clearTimeout(initTimer);
   }, []);
 
   return (

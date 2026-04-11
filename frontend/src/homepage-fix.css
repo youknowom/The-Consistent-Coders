@@ -1,0 +1,31 @@
+/* Temporary fix to ensure Stats and Footer are visible */
+.section-stats {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.section-stats .stat-item {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+.section-footer {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.section-footer .footer-eyebrow,
+.section-footer .footer-tagline,
+.section-footer .footer-cta,
+.section-footer .footer-links,
+.section-footer .footer-email-wrapper,
+.section-footer .footer-bottom {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+.reveal-up,
+.reveal-fade {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}

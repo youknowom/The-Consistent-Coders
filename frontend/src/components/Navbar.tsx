@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './NavbarStyles.css';
-import tccLogo from '../assets/images/logo/favicon/the tcc.png';
+// import tccLogo from '../assets/images/logo/favicon/the tcc.png';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -14,7 +14,7 @@ interface NavbarProps {
 
 export const Navbar: React.FC<NavbarProps> = ({ onMenuToggle, isMenuOpen }) => {
   const navRef = useRef<HTMLElement>(null);
-  const brandRef = useRef<HTMLDivElement>(null);
+  // const brandRef = useRef<HTMLDivElement>(null);
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
 

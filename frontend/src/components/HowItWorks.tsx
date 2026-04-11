@@ -4,6 +4,10 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import SplitType from 'split-type';
 
+import structuredLearningImg from '../assets/images/howitworks/structuredlearning.png';
+import teamProjectsImg from '../assets/images/howitworks/teamprojects.png';
+import earnRecognitionImg from '../assets/images/howitworks/earnrecognition.png';
+
 gsap.registerPlugin(ScrollTrigger);
 
 export const HowItWorks: React.FC = () => {
@@ -114,9 +118,9 @@ export const HowItWorks: React.FC = () => {
       </div>
 
       <div className="hiw-rows-container">
-        <div className="hiw-row">
+        <div className="hiw-row reveal-fade">
           <div className="hiw-row-bg">
-            <img src="./src/assets/images/howitworks/structuredlearning.png" alt="Structured Learning" />
+            <img src={structuredLearningImg} alt="Structured Learning" />
           </div>
           <div className="hiw-row-content">
             <h3 className="hiw-row-title">STRUCTURED LEARNING</h3>
@@ -124,9 +128,9 @@ export const HowItWorks: React.FC = () => {
           </div>
         </div>
 
-        <div className="hiw-row">
+        <div className="hiw-row reveal-fade">
           <div className="hiw-row-bg">
-            <img src="./src/assets/images/howitworks/teamprojects.png" alt="Team Projects" />
+            <img src={teamProjectsImg} alt="Team Projects" />
           </div>
           <div className="hiw-row-content">
             <h3 className="hiw-row-title">TEAM PROJECTS</h3>
@@ -134,9 +138,9 @@ export const HowItWorks: React.FC = () => {
           </div>
         </div>
 
-        <div className="hiw-row">
+        <div className="hiw-row reveal-fade">
           <div className="hiw-row-bg">
-            <img src="./src/assets/images/howitworks/earnrecognition.png" alt="Earn Recognition" />
+            <img src={earnRecognitionImg} alt="Earn Recognition" />
           </div>
           <div className="hiw-row-content">
             <h3 className="hiw-row-title">EARN RECOGNITION</h3>

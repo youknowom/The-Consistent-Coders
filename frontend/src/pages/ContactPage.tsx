@@ -19,7 +19,7 @@ export const ContactPage: React.FC = () => {
       // Hero title animation
       const heroTitle = document.querySelector('.contact-hero-title');
       if (heroTitle) {
-        const split = createSplitType(heroTitle as HTMLElement, { types: 'chars' });
+        const split = createSplitType(heroTitle as HTMLElement, { types: 'chars' } as any);
         splitInstanceRef.current = split;
         if (split?.chars) {
           gsap.fromTo(

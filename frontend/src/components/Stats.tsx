@@ -23,72 +23,69 @@ export const Stats: React.FC = () => {
   useEffect(() => {
     if (!sectionRef.current) return;
 
-    const ctx = gsap.context(() => {
-      const section = sectionRef.current;
-      if (!section) return;
+    // Small delay to ensure DOM is ready
+    const timer = setTimeout(() => {
+      const ctx = gsap.context(() => {
+        const section = sectionRef.current;
+        if (!section) return;
 
-      // SVG path drawing
-      const paths = section.querySelectorAll<SVGPathElement>('.draw-path');
-      paths.forEach((path) => {
-        const len = path.getTotalLength();
-        gsap.set(path, { strokeDasharray: len, strokeDashoffset: len });
-        gsap.to(path, {
-          strokeDashoffset: 0,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: section,
-            start: 'top 80%',
-            end: 'bottom 20%',
-            scrub: 1.5,
-          },
-        });
-      });
-
-      // Counter animations
-      const counters = section.querySelectorAll<HTMLElement>('.stat-num');
-      counters.forEach((counter) => {
-        const target = +(counter.getAttribute('data-target') || 0);
-        const suffix = counter.getAttribute('data-suffix') || '';
-        const proxy = { val: 0 };
-
-        ScrollTrigger.create({
-          trigger: counter,
-          start: 'top 85%',
-          once: true,
-          onEnter: () => {
-            gsap.to(proxy, {
-              val: target,
-              duration: 2.2,
-              ease: 'power2.out',
-              onUpdate: () => {
-                counter.textContent = Math.round(proxy.val) + suffix;
-              },
-            });
-          },
-        });
-      });
-
-      // Reveal fade animations
-      const statItems = section.querySelectorAll<HTMLElement>('.stat-item');
-      statItems.forEach((el) => {
-        gsap.fromTo(
-          el,
-          { y: 60, opacity: 0 },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 1,
-            ease: 'power3.out',
+        // SVG path drawing
+        const paths = section.querySelectorAll<SVGPathElement>('.draw-path');
+        paths.forEach((path) => {
+          const len = path.getTotalLength();
+          gsap.set(path, { strokeDasharray: len, strokeDashoffset: len });
+          gsap.to(path, {
+            strokeDashoffset: 0,
+            ease: 'none',
             scrollTrigger: {
-              trigger: el,
-              start: 'top 85%',
+              trigger: section,
+              start: 'top 80%',
+              end: 'bottom 20%',
+              scrub: 1.5,
             },
-          }
-        );
-      });
-    }, sectionRef);
+          });
+        });
 
-    return () => ctx.revert();
+        // Counter animations - trigger immediately on mount
+        const counters = section.querySelectorAll<HTMLElement>('.stat-num');
+        counters.forEach((counter) => {
+          const target = +(counter.getAttribute('data-target') || 0);
+          const suffix = counter.getAttribute('data-suffix') || '';
+          const proxy = { val: 0 };
+
+          // Animate immediately
+          gsap.to(proxy, {
+            val: target,
+            duration: 2.2,
+            delay: 0.5,
+            ease: 'power2.out',
+            onUpdate: () => {
+              counter.textContent = Math.round(proxy.val) + suffix;
+            },
+          });
+        });
+
+        // Reveal fade animations
+        const statItems = section.querySelectorAll<HTMLElement>('.stat-item');
+        statItems.forEach((el, index) => {
+          gsap.fromTo(
+            el,
+            { y: 60, opacity: 0 },
+            {
+              y: 0,
+              opacity: 1,
+              duration: 1,
+              delay: index * 0.1,
+              ease: 'power3.out',
+            }
+          );
+        });
+      }, sectionRef);
+
+      return () => ctx.revert();
+    }, 100);
+
+    return () => clearTimeout(timer);
   }, []);
 
   return (

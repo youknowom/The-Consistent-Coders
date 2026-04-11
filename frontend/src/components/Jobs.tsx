@@ -20,10 +20,10 @@ export const Jobs: React.FC = () => {
         const titleElements = document.querySelectorAll('.jobs-title.reveal-text');
         if (titleElements.length > 0) {
           titleElements.forEach((el) => {
-            const split = createSplitType(el as HTMLElement, { types: 'words' });
+            const split = createSplitType(el as HTMLElement, { types: 'words' } as any);
             if (split) {
               splitInstancesRef.current.push(split);
-              wrapWordsForReveal(split.words);
+              wrapWordsForReveal(split.words ?? undefined);
 
               gsap.fromTo(
                 split.words,

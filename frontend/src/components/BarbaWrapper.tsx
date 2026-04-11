@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -11,8 +11,14 @@ interface BarbaWrapperProps {
 
 export const BarbaWrapper: React.FC<BarbaWrapperProps> = ({ children }) => {
   const location = useLocation();
+  const isFirstRender = React.useRef(true);
 
   useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+
     // Page transition animation on route change
     const panels = document.querySelectorAll('.curtain-panel');
     
@@ -25,9 +31,8 @@ export const BarbaWrapper: React.FC<BarbaWrapperProps> = ({ children }) => {
     
     const animatePageTransition = async () => {
       try {
-        // Kill all active ScrollTriggers before transition
-        ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-        
+        // Note: Do not use ScrollTrigger.getAll().kill() here.
+        // React's cleanup functions in child components handle their own revert().
         // Animate curtain panels coming down (covering the page)
         await gsap.timeline()
           .set('.transition-curtain', { display: 'flex' })

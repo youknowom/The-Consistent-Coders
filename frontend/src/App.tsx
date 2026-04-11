@@ -4,7 +4,7 @@ import { useLenis } from './hooks/useLenis';
 import { CustomCursor } from './components/CustomCursor';
 import { Navbar } from './components/Navbar';
 import { FullscreenMenu } from './components/FullscreenMenu';
-import { Footer } from './components/Footer';
+// import { Footer } from './components/Footer';
 import { BarbaWrapper } from './components/BarbaWrapper';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { SEOMeta } from './seo/SEOMeta';
@@ -108,7 +108,7 @@ function AppContent() {
   useEffect(() => {
     const timer = setTimeout(() => {
       ScrollTrigger.refresh();
-    }, 100);
+    }, 300);
     return () => clearTimeout(timer);
   }, [location.pathname]);
 
@@ -116,11 +116,10 @@ function AppContent() {
   useEffect(() => {
     const sections = [
       { el: '.section-hero', bg: '#0e0e0e', color: '#fafafa' },
-      { el: '.section-stats', bg: '#050505', color: '#fafafa' },
-      { el: '.section-craft', bg: '#0e0e0e', color: '#fafafa' },
+      { el: '.section-vision', bg: '#050505', color: '#fafafa' },
+      { el: '.section-stats', bg: '#0e0e0e', color: '#fafafa' },
       { el: '.section-how-it-works', bg: '#050505', color: '#fafafa' },
       { el: '.section-comparator', bg: '#0e0e0e', color: '#fafafa' },
-      { el: '.section-jobs', bg: '#050505', color: '#fafafa' },
       { el: '.section-fame', bg: '#0e0e0e', color: '#fafafa' },
       { el: '.section-footer', bg: '#050505', color: '#fafafa' },
     ];

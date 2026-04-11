@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App.tsx';
-import 'locomotive-scroll/dist/locomotive-scroll.css';
 import 'lenis/dist/lenis.css';
 import './smoothScroll.css';
 import './style.css';
+import './homepage-fix.css';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

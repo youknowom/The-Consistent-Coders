@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import SplitType from 'split-type';
+// import SplitType from 'split-type';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -24,7 +24,7 @@ export const Hero: React.FC = () => {
       const cta = heroSection.querySelector('.hero-cta');
       
       if (heroSection) {
-        heroTl.from(heroSection, { clipPath: 'circle(0% at 50% 50%)', duration: 1.4, ease: 'power4.inOut' });
+        heroTl.from(heroSection, { opacity: 0, duration: 1.4, ease: 'power4.inOut' });
       }
       if (eyebrow) {
         heroTl.from(eyebrow, { y: 20, opacity: 0, duration: 0.6, ease: 'power2.out' }, '-=0.4');
@@ -91,7 +91,7 @@ export const Hero: React.FC = () => {
       </div>
 
       <div className="hero-content">
-        <div className="hero-eyebrow mono-text reveal-up">// EST. 2024 — COMMUNITY ECOSYSTEM</div>
+        <div className="hero-eyebrow mono-text reveal-up">// EST. 2026 — COMMUNITY ECOSYSTEM</div>
         <h1 className="hero-title variable-font">
           <div className="split-line">
             <span className="liquid-hover">THE</span>
@@ -110,7 +110,17 @@ export const Hero: React.FC = () => {
               <div className="btn-bg"></div>
             </Link>
           </div>
-          <div className="hero-scroll-hint mono-text">
+          <div 
+            className="hero-scroll-hint mono-text" 
+            style={{ cursor: 'pointer' }}
+            onClick={() => {
+              if ((window as any).lenis) {
+                (window as any).lenis.scrollTo('.section-vision', { offset: 0, duration: 1.5, easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
+              } else {
+                window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
+              }
+            }}
+          >
             <div className="scroll-line"></div>
             SCROLL
           </div>

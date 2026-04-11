@@ -5,7 +5,7 @@ import SplitType from 'split-type';
  */
 export const createSplitType = (
   element: HTMLElement,
-  options: Parameters<typeof SplitType>[1]
+  options: any
 ): SplitType | null => {
   try {
     return new SplitType(element, options);

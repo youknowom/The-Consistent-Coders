@@ -13,44 +13,49 @@ export const Footer: React.FC<FooterProps> = ({ minimal = false }) => {
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      // Reveal text
-      document.querySelectorAll('.footer-email.reveal-text').forEach((el) => {
-        const split = new SplitType(el as HTMLElement, { types: 'words' });
-        split.words?.forEach((word) => {
-          const wrapper = document.createElement('span');
-          wrapper.style.overflow = 'hidden';
-          wrapper.style.display = 'inline-block';
-          word.parentNode?.insertBefore(wrapper, word);
-          wrapper.appendChild(word);
+    // Small delay to ensure DOM is ready
+    const timer = setTimeout(() => {
+      const ctx = gsap.context(() => {
+        // Reveal text
+        document.querySelectorAll('.footer-email.reveal-text').forEach((el) => {
+          const split = new SplitType(el as HTMLElement, { types: 'words' } as any);
+          split.words?.forEach((word) => {
+            const wrapper = document.createElement('span');
+            wrapper.style.overflow = 'hidden';
+            wrapper.style.display = 'inline-block';
+            word.parentNode?.insertBefore(wrapper, word);
+            wrapper.appendChild(word);
+          });
+
+          gsap.fromTo(
+            split.words,
+            { y: '105%' },
+            {
+              y: '0%',
+              duration: 1.2,
+              stagger: 0.08,
+              ease: 'power4.out',
+              delay: 0.3,
+            }
+          );
         });
 
-        gsap.fromTo(
-          split.words,
-          { y: '105%' },
-          {
-            y: '0%',
-            duration: 1.2,
-            stagger: 0.08,
-            ease: 'power4.out',
-            scrollTrigger: { trigger: el, start: 'top 85%' },
-          }
-        );
-      });
-
-      // Reveal up
-      gsap.utils.toArray<HTMLElement>('.section-footer .reveal-up').forEach((el) => {
-        gsap.to(el, {
-          y: 0,
-          opacity: 1,
-          duration: 1,
-          ease: 'power3.out',
-          scrollTrigger: { trigger: el, start: 'top 88%' },
+        // Reveal up - animate immediately
+        gsap.utils.toArray<HTMLElement>('.section-footer .reveal-up').forEach((el, index) => {
+          gsap.to(el, {
+            y: 0,
+            opacity: 1,
+            duration: 1,
+            delay: index * 0.1,
+            ease: 'power3.out',
+          });
         });
-      });
-    }, sectionRef);
+      }, sectionRef);
 
-    return () => ctx.revert();
+      return () => ctx.revert();
+    }, 100);
+
+    return () => clearTimeout(timer);
   }, []);
 
   return (
