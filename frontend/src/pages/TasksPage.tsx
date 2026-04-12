@@ -28,8 +28,8 @@ const TASK_LIST: MicroTask[] = [
   ...Array.from({ length: 124 }).map((_, i) => ({
     id: `T-${(i + 3).toString().padStart(3, '0')}`,
     phase: i < 20 ? 'P02' : i < 40 ? 'P03' : i < 60 ? 'P04' : i < 80 ? 'P05' : i < 100 ? 'P06' : 'P07',
-    type: i % 2 === 0 ? 'Coding' : 'Non-Coding',
-    level: i % 4 === 0 ? 'Fresher' : i % 2 === 0 ? 'Intermediate' : 'Advanced' as any,
+    type: (i % 2 === 0 ? 'Coding' : 'Non-Coding') as 'Coding' | 'Non-Coding',
+    level: (i % 4 === 0 ? 'Fresher' : i % 2 === 0 ? 'Intermediate' : 'Advanced') as 'Fresher' | 'Intermediate' | 'Advanced',
     title: [
       'Auth Security Audit', 'Metadata Model Update', 'Env Manager Fix', 'Dark Mode Logic (FOUC)',
       'Dashboard Skeleton UI', 'Rank Badge Mapping', 'Onboarding Flow UI', 'Avatar Storage (S3)',
@@ -41,13 +41,13 @@ const TASK_LIST: MicroTask[] = [
       'Community Poll API', 'Newsletter Subscription', 'Email Template Design', 'Contribution Heatmap',
       'Stripe Payout Connect', 'HackerRank API Bridge', 'Real-time Chat Socket', 'Team Role System'
     ][i % 36] || 'Ecosystem Expansion Task',
-    priority: i % 5 === 0 ? 'High' : i % 2 === 0 ? 'Medium' : 'Low' as any,
+    priority: (i % 5 === 0 ? 'High' : i % 2 === 0 ? 'Medium' : 'Low') as 'High' | 'Medium' | 'Low',
     reward: `${(Math.floor(Math.random() * 400) + 150)} EXP`,
     description: 'Platform build process ka important task.',
     longDescription: 'Ye task website ki functional scalability and user retention ke liye bahut zaruri hai. Humein simple and efficient code likhna hai jo future users manage kar sake. Har mission ek naya learning experience hai.',
     realWorld: 'Professional software engineering teams at Stripe, Zerodha, and Meta use these exact patterns to manage large user bases.',
     subtasks: ['Task initialization', 'Feature build out', 'Production cross-validation']
-  })).sort((a, b) => a.id.localeCompare(b.id))
+  } as MicroTask)).sort((a, b) => a.id.localeCompare(b.id))
 ];
 
 const CustomSelect: React.FC<{ label: string, options: string[], value: string, onChange: (v: string) => void }> = ({ label, options, value, onChange }) => {
