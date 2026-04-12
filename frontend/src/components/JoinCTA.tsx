@@ -12,7 +12,7 @@ export const JoinCTA: React.FC = () => {
     const ctx = gsap.context(() => {
       gsap.from('.cta-headline span', {
         scrollTrigger: {
-          trigger: '.section-cta',
+          trigger: containerRef.current,
           start: 'top 80%',
         },
         y: 100,
@@ -24,7 +24,7 @@ export const JoinCTA: React.FC = () => {
       
       gsap.from('.cta-btn-wrap', {
         scrollTrigger: {
-          trigger: '.section-cta',
+          trigger: containerRef.current,
           start: 'top 75%',
         },
         y: 30,
