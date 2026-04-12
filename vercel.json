@@ -1,4 +1,5 @@
 {
+  "//": "Triggering fresh build with new Root Directory settings",
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "installCommand": "npm install",
